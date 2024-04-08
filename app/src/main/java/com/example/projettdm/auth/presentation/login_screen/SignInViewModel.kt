@@ -47,7 +47,7 @@ class SignInViewModel @Inject constructor(
         repository.loginUser(email, password).collect { result ->
             when (result) {
                 is Resource.Success -> {
-                    _signInState.send(SignInState(isSuccess = "Sign In Success "))
+                    _signInState.send(SignInState(isSuccess = true))
                 }
                 is Resource.Loading -> {
                     _signInState.send(SignInState(isLoading = true))

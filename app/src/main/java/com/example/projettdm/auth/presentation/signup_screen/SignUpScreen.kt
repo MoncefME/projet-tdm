@@ -140,7 +140,7 @@ fun SignUpScreen(
 
     LaunchedEffect(key1 = state.value?.isSuccess) {
         scope.launch {
-            if (state.value?.isSuccess?.isNotEmpty() == true) {
+            if (state.value?.isSuccess == true) {
                 val success = state.value?.isSuccess
                 Toast.makeText(context, "$success", Toast.LENGTH_LONG).show()
             }

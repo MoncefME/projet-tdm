@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projettdm.auth.presentation.login_screen.SignInScreen
+import com.example.projettdm.auth.presentation.profile_screen.ProfileScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpScreen
 
 
@@ -24,6 +25,9 @@ fun NavigationGraph(
         composable(route = Screens.SignUpScreen.route) {
             SignUpScreen(navController)
 
+        }
+        composable(route = Screens.ProfileScreen.route) {
+            ProfileScreen(navController)
         }
     }
 

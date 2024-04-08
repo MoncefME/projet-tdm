@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
-    id("com.google.gms.google-services")
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -54,6 +54,7 @@ android {
 
 dependencies {
 
+    // AndroidX Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -62,8 +63,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.google.firebase.auth.ktx)
     implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,6 +74,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Firebase
+    implementation(libs.google.firebase.auth.ktx)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.auth.ktx)
+
+    // Google Auth Dependency
+    implementation(libs.play.services.auth)
+
 
     // Retrofit
     implementation(libs.retrofit)
@@ -88,20 +102,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    // Coroutine Lifecycle Scopes
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    // System ui controller
-    implementation (libs.accompanist.systemuicontroller)
-
-    // FireBase
-    implementation(platform(libs.firebase.bom))
-    implementation("com.google.firebase:firebase-analytics")
-
-    //Google auth dependency
-    implementation("com.google.android.gms:play-services-auth:21.0.0")
-    implementation(libs.firebase.auth.ktx)
-    implementation(libs.androidx.material3.android)
+    // System UI Controller
+    implementation(libs.accompanist.systemuicontroller)
 
 }

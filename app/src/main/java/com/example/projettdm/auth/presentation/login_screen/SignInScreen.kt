@@ -1,6 +1,7 @@
 package com.example.projettdm.auth.presentation.login_screen
 
 
+import android.app.Activity
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,6 +31,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 @Composable
 fun SignInScreen(
@@ -99,6 +101,9 @@ fun SignInScreen(
             onClick = {
                 scope.launch {
                     viewModel.loginUser(email, password)
+                    if (state.value?.isSuccess == true) {
+                        navController.navigate(Screens.ProfileScreen.route)
+                    }
                 }
             },
             modifier = Modifier
@@ -130,15 +135,18 @@ fun SignInScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             IconButton(onClick = {
-            val gso= GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestIdToken(ServerClient)
-                .build()
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .requestIdToken(ServerClient)
+                    .build()
 
-                val googleSingInClient = GoogleSignIn.getClient(context, gso)
+                val googleSignInClient = GoogleSignIn.getClient(context, gso)
 
-            launcher.launch(googleSingInClient.signInIntent)
+                launcher.launch(googleSignInClient.signInIntent)
 
+                if(googleSignInState.success != null){
+                    navController.navigate(Screens.ProfileScreen.route)
+                }
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_google),
