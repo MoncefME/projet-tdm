@@ -1,10 +1,9 @@
 package com.example.projettdm.auth.presentation.login_screen
 
-
-import android.app.Activity
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,8 +41,6 @@ fun SignInScreen(
     val googleSignInState = viewModel.googleState.value
 
 
-
-
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
             val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
@@ -70,11 +67,18 @@ fun SignInScreen(
         verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
+            modifier = Modifier.padding(bottom = 10.dp),
+            text = "Sign In",
+            fontWeight = FontWeight.Bold,
+            fontSize = 35.sp,
+        )
+        Text(
             text = "Enter your credential's to register",
             fontWeight = FontWeight.Medium,
             fontSize = 15.sp,
             color = Color.Gray,
         )
+        Spacer(modifier = Modifier.height(16.dp))
         TextField(
             value = email,
             onValueChange = {
@@ -119,15 +123,23 @@ fun SignInScreen(
             }
 
         }
+        Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "New User? Sign Up ",
+
             fontWeight = FontWeight.Bold,
             color = Color.Black,
             modifier = Modifier.clickable {
                 navController.navigate(Screens.SignUpScreen.route)
             },
         )
-        Text(text = "or connect with", fontWeight = FontWeight.Medium, color = Color.Gray)
+        Text(text = "or connect with",
+            modifier = Modifier
+                .padding(
+                    top = 40.dp,
+                ),
+            fontWeight = FontWeight.Medium,
+            color = Color.Gray)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -144,9 +156,6 @@ fun SignInScreen(
 
                 launcher.launch(googleSignInClient.signInIntent)
 
-                if(googleSignInState.success != null){
-                    navController.navigate(Screens.ProfileScreen.route)
-                }
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_google),
@@ -155,7 +164,6 @@ fun SignInScreen(
                     tint = Color.Unspecified
                 )
             }
-            Spacer(modifier = Modifier.width(20.dp))
 
 
             LaunchedEffect(key1 = state.value?.isError) {
@@ -171,9 +179,21 @@ fun SignInScreen(
                 scope.launch {
                     if (googleSignInState.success != null) {
                         Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
+                        navController.navigate(Screens.ProfileScreen.route)
                     }
                 }
             }
+
+            LaunchedEffect(key1 = state.value?.isSuccess) {
+                scope.launch {
+                    if(state.value?.isSuccess == true){
+                        val success = state.value?.isSuccess
+                        Toast.makeText(context, "$success", Toast.LENGTH_LONG).show()
+                        navController.navigate(Screens.ProfileScreen.route)
+                    }
+                }
+            }
+
 
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
@@ -181,7 +201,6 @@ fun SignInScreen(
                 CircularProgressIndicator()
             }
         }
-
 
     }
 }

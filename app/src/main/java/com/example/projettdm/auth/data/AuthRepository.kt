@@ -11,6 +11,5 @@ interface AuthRepository {
     fun registerUser(email: String, password: String): Flow<Resource<AuthResult>>
     fun googleSignIn(credential: AuthCredential): Flow<Resource<AuthResult>>
     fun logout() : Flow<Resource<Unit>>
-
     fun getCurrentUser() : FirebaseUser?
 }
