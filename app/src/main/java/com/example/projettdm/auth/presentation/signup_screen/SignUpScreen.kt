@@ -21,7 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.projettdm.R
 import com.example.projettdm.auth.data.Constant
-import com.example.projettdm.auth.navigation.Screens
+import com.example.projettdm.common.navigation.Screens
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

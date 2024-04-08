@@ -105,4 +105,17 @@ dependencies {
     // System UI Controller
     implementation(libs.accompanist.systemuicontroller)
 
+    // Splash API
+    implementation(libs.androidx.core.splashscreen)
+
+    // Navigation Compose
+    implementation(libs.androidx.navigation.compose)
+
+    // Pager and Indicators - Accompanist
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+
+    // DataStore Preferences
+    implementation(libs.androidx.datastore.preferences)
+
 }

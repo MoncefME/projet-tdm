@@ -1,6 +1,6 @@
 package com.example.projettdm.auth.data
 
-import com.example.projettdm.common.Resource
+import com.example.projettdm.common.utils.Resource
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth

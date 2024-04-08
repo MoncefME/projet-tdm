@@ -1,6 +1,9 @@
 [versions]
+accompanistPager = "0.24.2-alpha"
 accompanistSystemuicontroller = "0.27.0"
 agp = "8.3.1"
+coreSplashscreen = "1.0.1"
+datastorePreferences = "1.0.0"
 firebaseBom = "32.8.0"
 googleServices = "4.4.1"
 kotlin = "1.9.22"
@@ -19,6 +22,7 @@ hiltAndroid = "2.50"
 hiltCompiler = "2.50"
 hiltCompilerVersion = "1.2.0"
 loggingInterceptor = "4.10.0"
+navigationCompose = "2.7.7"
 okhttpVersion = "4.11.0"
 playServicesAuth = "21.0.0"
 retrofitVersion = "2.9.0"
@@ -28,11 +32,16 @@ material3Android = "1.2.1"
 
 
 [libraries]
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
+accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanistPager" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompilerVersion" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompilerVersion" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
