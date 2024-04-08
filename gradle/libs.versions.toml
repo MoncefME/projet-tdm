@@ -2,7 +2,7 @@
 accompanistSystemuicontroller = "0.27.0"
 agp = "8.3.1"
 firebaseBom = "32.8.0"
-kotlin = "1.9.0"
+kotlin = "1.9.22"
 coreKtx = "1.12.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -12,18 +12,18 @@ kotlinxCoroutinesCore = "1.7.3"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
 composeBom = "2024.03.00"
-hilt = "2.49"
+hilt = "2.50"
 converterGson = "2.9.0"
-hiltAndroid = "2.49"
-hiltCompiler = "2.44"
+hiltAndroid = "2.50"
+hiltCompiler = "2.50"
 hiltCompilerVersion = "1.2.0"
 loggingInterceptor = "4.10.0"
-okhttp = "4.11.0"
-okhttpLogging = "4.10.0"
 okhttpVersion = "4.11.0"
-retrofit = "2.9.0"
 retrofitVersion = "2.9.0"
 firebase-firestore-ktx = "24.11.0"
+firebaseAuthKtx = "22.3.1"
+material3Android = "1.2.1"
+
 
 
 
@@ -51,7 +51,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-material3 = { group = "androidx.compose.material", name = "material" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
@@ -59,6 +59,8 @@ okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttpVersion"
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebase-firestore-ktx" }
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth" }
+google-firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

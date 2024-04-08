@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.9"
     }
     packaging {
         resources {
@@ -62,6 +62,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.google.firebase.auth.ktx)
+    implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -96,5 +98,10 @@ dependencies {
     // FireBase
     implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-analytics")
+
+    //Google auth dependency
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.material3.android)
 
 }
