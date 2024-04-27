@@ -1,8 +1,6 @@
 package com.example.projettdm.auth.presentation.signup_screen
 
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,16 +18,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.projettdm.R
-import com.example.projettdm.auth.data.Constant
 import com.example.projettdm.common.navigation.Screens
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.launch
-
-
 
 @Composable
 fun SignUpScreen(
@@ -37,22 +27,9 @@ fun SignUpScreen(
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
     val googleSignInState = viewModel.googleState.value
-
-
-    val launcher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
-            val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-            try {
-                val result = account.getResult(ApiException::class.java)
-                val credentials = GoogleAuthProvider.getCredential(result.idToken, null)
-                viewModel.googleSignIn(credentials)
-            } catch (it: ApiException) {
-                print(it)
-            }
-        }
-
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val state = viewModel.signUpState.collectAsState(initial = null)
@@ -150,14 +127,11 @@ fun SignUpScreen(
                 .padding(top = 10.dp), horizontalArrangement = Arrangement.Center
         ) {
             IconButton(onClick = {
-                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(Constant.ServerClient)
-                    .requestEmail()
-                    .build()
-
-                val googleSignInClient = GoogleSignIn.getClient(context, gso)
-
-                launcher.launch(googleSignInClient.signInIntent)
+                // TODO Later : Handle Google Auth
+                scope.launch {
+                    viewModel.googleSignIn("google")
+                }
+                navController.navigate(Screens.ProfileScreen.route)
             }) {
                 Icon(
                     modifier = Modifier.size(50.dp),
@@ -173,6 +147,9 @@ fun SignUpScreen(
         }
     }
 
+
+
+    // LaunchedEffect block to observe changes in the sign-in success state
     LaunchedEffect(key1 = state.value?.isSuccess) {
         scope.launch {
             if (state.value?.isSuccess == true) {
@@ -182,6 +159,8 @@ fun SignUpScreen(
             }
         }
     }
+
+    // LaunchedEffect block to observe changes in the sign-in error state
     LaunchedEffect(key1 = state.value?.isError) {
         scope.launch {
             if (state.value?.isError?.isNotBlank() == true) {
@@ -190,6 +169,8 @@ fun SignUpScreen(
             }
         }
     }
+
+    // LaunchedEffect block to observe changes in the Google sign-in success state
     LaunchedEffect(key1 = googleSignInState.success) {
         scope.launch {
             if (googleSignInState.success != null) {
@@ -198,4 +179,5 @@ fun SignUpScreen(
             }
         }
     }
+
 }

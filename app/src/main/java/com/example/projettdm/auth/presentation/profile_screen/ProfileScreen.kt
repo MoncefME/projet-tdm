@@ -29,7 +29,7 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.Top
     ) {
         if (user != null) {
-            Text(text = "Email: ${user!!.email}")
+            Text(text = "Email: ${user.toString()}")
 
             Button(
                 onClick = {

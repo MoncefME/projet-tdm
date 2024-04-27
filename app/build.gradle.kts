@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
-    alias(libs.plugins.google.services)
+//    alias(libs.plugins.google.services)
 }
 
 android {
@@ -75,16 +75,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Firebase
-    implementation(libs.google.firebase.auth.ktx)
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics.ktx)
-    implementation(libs.firebase.firestore.ktx)
-    implementation(libs.firebase.auth.ktx)
 
     // Google Auth Dependency
     implementation(libs.play.services.auth)
-
 
     // Retrofit
     implementation(libs.retrofit)
