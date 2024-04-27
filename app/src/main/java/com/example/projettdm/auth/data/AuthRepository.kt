@@ -1,15 +1,13 @@
 package com.example.projettdm.auth.data
 
-import com.example.projettdm.common.Resource
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseUser
+import com.example.projettdm.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    fun loginUser(email: String, password: String): Flow<Resource<AuthResult>>
-    fun registerUser(email: String, password: String): Flow<Resource<AuthResult>>
-    fun googleSignIn(credential: AuthCredential): Flow<Resource<AuthResult>>
+    fun loginUser(email: String, password: String): Flow<Resource<Boolean>>
+    fun registerUser(email: String, password: String): Flow<Resource<Boolean>>
+    fun googleSignIn(idToken: String): Flow<Resource<Boolean>>
     fun logout() : Flow<Resource<Unit>>
-    fun getCurrentUser() : FirebaseUser?
+    fun getCurrentUser() : Any
+
 }

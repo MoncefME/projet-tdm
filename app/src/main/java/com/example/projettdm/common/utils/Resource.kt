@@ -1,4 +1,4 @@
-package com.example.projettdm.common
+package com.example.projettdm.common.utils
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : Resource<T>(data)

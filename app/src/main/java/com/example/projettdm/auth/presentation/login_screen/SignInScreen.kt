@@ -1,9 +1,6 @@
 package com.example.projettdm.auth.presentation.login_screen
 
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,16 +18,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.projettdm.R
-import com.example.projettdm.auth.data.Constant.ServerClient
-import com.example.projettdm.auth.navigation.Screens
-import com.example.projettdm.ui.theme.lightBlue
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GoogleAuthProvider
-
+import com.example.projettdm.common.navigation.Screens
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 @Composable
 fun SignInScreen(
@@ -39,23 +28,9 @@ fun SignInScreen(
 ) {
 
     val googleSignInState = viewModel.googleState.value
-
-
-    val launcher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
-            val account = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-            try {
-                val result = account.getResult(ApiException::class.java)
-                val credentials = GoogleAuthProvider.getCredential(result.idToken, null)
-                viewModel.googleSignIn(credentials)
-            } catch (it: ApiException) {
-                print(it)
-            }
-        }
-
-
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val state = viewModel.signInState.collectAsState(initial = null)
@@ -147,15 +122,11 @@ fun SignInScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             IconButton(onClick = {
-                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .requestIdToken(ServerClient)
-                    .build()
-
-                val googleSignInClient = GoogleSignIn.getClient(context, gso)
-
-                launcher.launch(googleSignInClient.signInIntent)
-
+                // TODO Later: Implement Google Sign In
+                scope.launch {
+                    viewModel.googleSignIn("google")
+                }
+                navController.navigate(Screens.ProfileScreen.route)
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_google),
@@ -165,16 +136,17 @@ fun SignInScreen(
                 )
             }
 
-
+            // LaunchedEffect block to observe changes in the error state
             LaunchedEffect(key1 = state.value?.isError) {
                 scope.launch {
                     if (state.value?.isError?.isNotEmpty() == true) {
                         val error = state.value?.isError
-                        Toast.makeText(context, "${error}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "$error", Toast.LENGTH_LONG).show()
                     }
                 }
             }
 
+            // LaunchedEffect block to observe changes in the Google sign-in success state
             LaunchedEffect(key1 = googleSignInState.success) {
                 scope.launch {
                     if (googleSignInState.success != null) {
@@ -184,6 +156,7 @@ fun SignInScreen(
                 }
             }
 
+            // LaunchedEffect block to observe changes in the sign-in success state
             LaunchedEffect(key1 = state.value?.isSuccess) {
                 scope.launch {
                     if(state.value?.isSuccess == true){
@@ -194,13 +167,11 @@ fun SignInScreen(
                 }
             }
 
-
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             if (googleSignInState.loading){
                 CircularProgressIndicator()
             }
         }
-
     }
 }
