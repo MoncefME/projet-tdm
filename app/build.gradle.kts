@@ -118,4 +118,9 @@ dependencies {
     // DataStore Preferences
     implementation(libs.androidx.datastore.preferences)
 
+    //Map
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
+
+
 }
