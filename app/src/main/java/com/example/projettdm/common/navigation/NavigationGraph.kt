@@ -1,5 +1,6 @@
 package com.example.projettdm.common.navigation
 
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,6 +18,7 @@ import com.example.projettdm.auth.presentation.profile_screen.ProfileScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpScreen
 import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
+import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.parking_map.presentation.ParkingMapScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -26,6 +29,9 @@ fun NavigationGraph(
     navController: NavHostController = rememberNavController(),
     startDestination: String
 ) {
+
+  val parkingViewModel = hiltViewModel<ParkingViewModel>()
+
     NavHost(
         navController = navController,
         startDestination = startDestination
@@ -75,7 +81,7 @@ fun NavigationGraph(
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    ParkingListScreen(navController)
+                    ParkingListScreen(navController, parkingViewModel)
                 }
             }
         }
@@ -99,7 +105,7 @@ fun NavigationGraph(
             }
         }
 
-        composable(route = Screens.ParkingDetailsScreen.route) {
+        composable(route = Screens.ParkingDetailsScreen.route + "/{parkingId}"){
             Scaffold (
                 bottomBar = {
                     BottomNavigationBar(
