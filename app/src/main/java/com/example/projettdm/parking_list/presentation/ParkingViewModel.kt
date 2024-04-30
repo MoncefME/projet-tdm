@@ -20,7 +20,7 @@ class ParkingViewModel @Inject constructor(private val repository: ParkingReposi
     val error = mutableStateOf(false)
 
     init{
-        getParkingList()
+       getParkingList()
     }
     private fun getParkingList() {
         viewModelScope.launch {
