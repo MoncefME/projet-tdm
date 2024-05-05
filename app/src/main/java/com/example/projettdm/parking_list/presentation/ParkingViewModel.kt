@@ -13,7 +13,10 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ParkingViewModel @Inject constructor(private val repository: ParkingRepository) :
+class ParkingViewModel @Inject constructor(
+    private val repository: ParkingRepository,
+
+) :
     ViewModel() {
 
     val parkings = mutableStateOf((listOf<Parking>()))
@@ -28,8 +31,6 @@ class ParkingViewModel @Inject constructor(private val repository: ParkingReposi
                 val response = repository.getParkingList()
                 if (response.isSuccessful) {
                     parkings.value = response.body()!!
-
-
                 } else {
                     println("error")
                     error.value = true

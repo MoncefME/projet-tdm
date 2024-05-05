@@ -32,6 +32,7 @@ import com.example.projettdm.R
 import com.example.projettdm.common.navigation.Screens
 import com.example.projettdm.parking_list.data.remote.ParkingAPI
 import com.example.projettdm.parking_list.data.remote.response.Parking
+import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
@@ -41,7 +42,7 @@ fun ParkingListScreen(
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        displayError(viewModel = viewModel)
+        DisplayError(viewModel = viewModel)
         Text(text = "Parking List Screen new")
         LazyColumn {
 
@@ -81,18 +82,18 @@ fun ParkingCard(parking: Parking, navController: NavController) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = " parking.name",
+                    text = parking.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = parking.setup,
+                    text = parking.city,
                     fontSize = 16.sp,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = parking.punchline,
+                    text = parking.price.toString(),
                     fontSize = 16.sp,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -112,7 +113,7 @@ fun ParkingCard(parking: Parking, navController: NavController) {
 
 
 @Composable
-fun displayError(viewModel: ParkingViewModel){
+fun DisplayError(viewModel: ParkingViewModel){
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
