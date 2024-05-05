@@ -1,5 +1,6 @@
 package com.example.projettdm.common.navigation
 
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,8 +18,10 @@ import com.example.projettdm.auth.presentation.profile_screen.ProfileScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpScreen
 import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
+import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.parking_map.presentation.ParkingMapScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsScreen
+import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalPagerApi::class)
@@ -26,6 +30,10 @@ fun NavigationGraph(
     navController: NavHostController = rememberNavController(),
     startDestination: String
 ) {
+    val parkingViewModel = hiltViewModel<ParkingViewModel>()
+    val parkingDetailsViewModel = hiltViewModel<ParkingDetailsViewModel>()
+
+
     NavHost(
         navController = navController,
         startDestination = startDestination
@@ -43,52 +51,52 @@ fun NavigationGraph(
         }
 
         composable(route = Screens.ProfileScreen.route) {
-            Scaffold (
+            Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
                         bottomNavController = navController,
-                        screenIndex =  3
+                        screenIndex = 3
                     )
                 }
-            ){
+            ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
-                ){
+                ) {
                     ProfileScreen(navController)
                 }
             }
         }
 
         composable(route = Screens.ParkingListScreen.route) {
-            Scaffold (
+            Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
                         bottomNavController = navController,
                         screenIndex = 0
                     )
                 }
-            ){
+            ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    ParkingListScreen(navController)
+                    ParkingListScreen(navController, parkingViewModel)
                 }
             }
         }
 
         composable(route = Screens.ParkingMapScreen.route) {
-            Scaffold (
+            Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
                         bottomNavController = navController,
                         screenIndex = 1
                     )
                 }
-            ){
+            ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -99,21 +107,24 @@ fun NavigationGraph(
             }
         }
 
-        composable(route = Screens.ParkingDetailsScreen.route) {
-            Scaffold (
+        composable(route = Screens.ParkingDetailsScreen.route + "/{parkingId}") {backStackEntry->
+            Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
                         bottomNavController = navController,
                         screenIndex = 2
                     )
                 }
-            ){
+            ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    ParkingDetailsScreen(navController)
+                    val parkingId = backStackEntry.arguments?.getString("parkingId")
+                    if (parkingId != null) {
+                        ParkingDetailsScreen(navController, parkingDetailsViewModel, parkingId.toInt())
+                    }
                 }
             }
         }
