@@ -14,8 +14,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projettdm.auth.presentation.login_screen.SignInScreen
+import com.example.projettdm.auth.presentation.login_screen.SignInViewModel
 import com.example.projettdm.auth.presentation.profile_screen.ProfileScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpScreen
+import com.example.projettdm.auth.presentation.signup_screen.SignUpViewModel
 import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
@@ -32,6 +34,8 @@ fun NavigationGraph(
 ) {
     val parkingViewModel = hiltViewModel<ParkingViewModel>()
     val parkingDetailsViewModel = hiltViewModel<ParkingDetailsViewModel>()
+    val signInViewModel = hiltViewModel<SignInViewModel>()
+    val loginViewModel = hiltViewModel<SignUpViewModel>()
 
 
     NavHost(
@@ -43,11 +47,11 @@ fun NavigationGraph(
         }
 
         composable(route = Screens.SignInScreen.route) {
-            SignInScreen(navController)
+            SignInScreen(navController, signInViewModel)
         }
 
         composable(route = Screens.SignUpScreen.route) {
-            SignUpScreen(navController)
+            SignUpScreen(navController, loginViewModel)
         }
 
         composable(route = Screens.ProfileScreen.route) {

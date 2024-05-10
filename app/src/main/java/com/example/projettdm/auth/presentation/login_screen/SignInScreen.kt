@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SignInScreen(
     navController: NavController,
-    viewModel: SignInViewModel = hiltViewModel()
+    viewModel: SignInViewModel
 ) {
 
     val googleSignInState = viewModel.googleState.value

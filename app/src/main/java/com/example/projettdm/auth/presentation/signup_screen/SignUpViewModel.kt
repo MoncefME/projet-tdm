@@ -4,13 +4,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.projettdm.auth.data.AuthRepository
 import com.example.projettdm.auth.presentation.login_screen.GoogleSignInState
+import com.example.projettdm.auth.repository.AuthRepository
 import com.example.projettdm.common.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -23,21 +25,17 @@ class SignUpViewModel @Inject constructor(
     val signUpState  = _signUpState.receiveAsFlow()
 
 
-    fun registerUser(email: String, password:String) = viewModelScope.launch {
-        repository.registerUser(email, password).collect{result ->
-            when(result){
-                is Resource.Success ->{
+    fun registerUser(email: String, password:String,firstName:String,lastName:String,phone:String) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            repository.signup(email, password, firstName, lastName, phone).let { response ->
+                if (response.isSuccessful) {
                     _signUpState.send(SignUpState(isSuccess = true))
-                }
-                is Resource.Loading ->{
-                    _signUpState.send(SignUpState(isLoading = true))
-                }
-                is Resource.Error ->{
-
-                    _signUpState.send(SignUpState(isError = result.message))
+                    print("registerUser: ${response.body()}")
+                } else {
+                    _signUpState.send(SignUpState(isError = response.message()))
+                    print("registerUser: ${response.message()}")
                 }
             }
-
         }
     }
 
@@ -46,19 +44,7 @@ class SignUpViewModel @Inject constructor(
     val googleState: State<GoogleSignInState> = _googleState
 
     fun googleSignIn(credential: String) = viewModelScope.launch {
-        repository.googleSignIn(credential).collect { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _googleState.value = GoogleSignInState(success = result.data)
-                }
-                is Resource.Loading -> {
-                    _googleState.value = GoogleSignInState(loading = true)
-                }
-                is Resource.Error -> {
-                    _googleState.value = GoogleSignInState(error = result.message!!)
-                }
-            }
-        }
+        print("googleSignIn: $credential")
     }
 
 

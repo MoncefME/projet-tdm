@@ -13,7 +13,7 @@ interface ParkingAPI {
     suspend fun getParkingById(@Path("id") id:Int): Response<Parking>
 
     companion object {
-        const val BASE_URL = "http://192.168.43.51:3000/"
+        const val BASE_URL = "https://backend-bdm.onrender.com"
     }
 }
 

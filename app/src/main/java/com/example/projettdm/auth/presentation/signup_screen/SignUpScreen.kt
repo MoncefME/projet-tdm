@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SignUpScreen(
     navController: NavController,
-    viewModel: SignUpViewModel = hiltViewModel()
+    viewModel: SignUpViewModel
 ) {
     val googleSignInState = viewModel.googleState.value
     var email by rememberSaveable { mutableStateOf("") }
@@ -84,7 +84,7 @@ fun SignUpScreen(
         Button(
             onClick = {
                 scope.launch {
-                    viewModel.registerUser(email, password)
+                    viewModel.registerUser(email, password,"test","test","test")
                 }
             },
             modifier = Modifier

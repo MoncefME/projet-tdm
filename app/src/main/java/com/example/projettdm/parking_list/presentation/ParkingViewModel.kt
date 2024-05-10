@@ -38,7 +38,6 @@ class ParkingViewModel @Inject constructor(
                 }
             }
         }
-
     }
 
 }
