@@ -27,7 +27,7 @@ fun SignInScreen(
     viewModel: SignInViewModel
 ) {
 
-    val googleSignInState = viewModel.googleState.value
+//    val googleSignInState = viewModel.googleState.value
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
@@ -123,9 +123,9 @@ fun SignInScreen(
         ) {
             IconButton(onClick = {
                 // TODO Later: Implement Google Sign In
-                scope.launch {
-                    viewModel.googleSignIn("google")
-                }
+//                scope.launch {
+//                    viewModel.googleSignIn("google")
+//                }
                 navController.navigate(Screens.ProfileScreen.route)
             }) {
                 Icon(
@@ -147,14 +147,14 @@ fun SignInScreen(
             }
 
             // LaunchedEffect block to observe changes in the Google sign-in success state
-            LaunchedEffect(key1 = googleSignInState.success) {
-                scope.launch {
-                    if (googleSignInState.success != null) {
-                        Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
-                        navController.navigate(Screens.ProfileScreen.route)
-                    }
-                }
-            }
+//            LaunchedEffect(key1 = googleSignInState.success) {
+//                scope.launch {
+//                    if (googleSignInState.success != null) {
+//                        Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
+//                        navController.navigate(Screens.ProfileScreen.route)
+//                    }
+//                }
+//            }
 
             // LaunchedEffect block to observe changes in the sign-in success state
             LaunchedEffect(key1 = state.value?.isSuccess) {
@@ -168,10 +168,10 @@ fun SignInScreen(
             }
 
         }
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            if (googleSignInState.loading){
-                CircularProgressIndicator()
-            }
-        }
+//        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+//            if (googleSignInState.loading){
+//                CircularProgressIndicator()
+//            }
+//        }
     }
 }

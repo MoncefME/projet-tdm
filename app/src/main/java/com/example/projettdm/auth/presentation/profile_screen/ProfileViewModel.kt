@@ -12,20 +12,21 @@ class ProfileViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    private val _user = MutableStateFlow<Any?>(null)
-    val user: StateFlow<Any?> = _user
+//    private val _user = MutableStateFlow<Any?>(null)
+//    val user: StateFlow<Any?> = _user
 
-    init {
-        fetchUser()
-    }
-
-    private fun fetchUser() {
-        _user.value = "test"
-    }
-
-     fun logout() {
-        authRepository.logout()
-
-        _user.value = null
-    }
+//    init {
+//        fetchUser()
+//    }
+//
+//    private fun fetchUser() {
+//        _user.value = "test"
+//    }
+//
+//     fun logout() {
+//        authRepository.logout()
+//
+//        _user.value = null
+//    }
+//}
 }

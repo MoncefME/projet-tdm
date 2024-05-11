@@ -1,5 +1,6 @@
 package com.example.projettdm.auth.presentation.login_screen
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -26,22 +27,16 @@ class SignInViewModel @Inject constructor(
     private val _googleState = mutableStateOf(GoogleSignInState())
     val googleState: State<GoogleSignInState> = _googleState
 
-    fun googleSignIn(idToken: String) = viewModelScope.launch {
-        println("googleSignIn: $idToken")
-    }
+//    fun googleSignIn(idToken: String) = viewModelScope.launch {
+//        println("googleSignIn: $idToken")
+//    }
 
 
     fun loginUser(email: String, password: String) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
             repository.login(email, password).let { response ->
-                if (response.isSuccessful) {
-                    _signInState.send(SignInState(isSuccess = true))
-                    println("loginUser: ${response.body()}")
-                } else {
-                    _signInState.send(SignInState(isError = response.message()))
-                    println("loginUser: ${response.message()}")
-                }
+                _signInState.send(SignInState(isSuccess = true))
+                Log.d("loginUser", response.toString())
             }
-        }
+
     }
 }

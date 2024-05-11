@@ -1,5 +1,6 @@
 package com.example.projettdm.auth.presentation.signup_screen
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -25,28 +26,27 @@ class SignUpViewModel @Inject constructor(
     val signUpState  = _signUpState.receiveAsFlow()
 
 
-    fun registerUser(email: String, password:String,firstName:String,lastName:String,phone:String) = viewModelScope.launch {
-        withContext(Dispatchers.IO) {
-            repository.signup(email, password, firstName, lastName, phone).let { response ->
-                if (response.isSuccessful) {
-                    _signUpState.send(SignUpState(isSuccess = true))
-                    print("registerUser: ${response.body()}")
-                } else {
-                    _signUpState.send(SignUpState(isError = response.message()))
-                    print("registerUser: ${response.message()}")
-                }
-            }
+    fun registerUser(
+        email: String,
+        password:String,
+        firstName:String,
+        lastName:String,
+        phone:String
+    ) = viewModelScope.launch {
+        repository.signup(email, password, firstName, lastName, phone).let { response ->
+            _signUpState.send(SignUpState(isSuccess = true))
+            Log.d("registerUser", response.toString())
         }
     }
-
-
-    private val _googleState = mutableStateOf(GoogleSignInState())
-    val googleState: State<GoogleSignInState> = _googleState
-
-    fun googleSignIn(credential: String) = viewModelScope.launch {
-        print("googleSignIn: $credential")
-    }
-
-
-
 }
+
+//
+//    private val _googleState = mutableStateOf(GoogleSignInState())
+//    val googleState: State<GoogleSignInState> = _googleState
+
+//    fun googleSignIn(credential: String) = viewModelScope.launch {
+//        print("googleSignIn: $credential")
+//    }
+
+
+
