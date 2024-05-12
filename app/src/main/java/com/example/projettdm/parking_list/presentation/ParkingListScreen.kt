@@ -83,6 +83,7 @@ fun ParkingCard(parking: Parking, navController: NavController) {
             Column(
                 modifier = Modifier.weight(1f)
             ) {
+                Text(text = parking.id.toString(), fontSize = 16.sp, modifier = Modifier.padding(bottom = 8.dp))
                 Text(
                     text = parking.name,
                     fontWeight = FontWeight.Bold,
@@ -102,11 +103,11 @@ fun ParkingCard(parking: Parking, navController: NavController) {
                 Button(
                     modifier = Modifier.background(color = Color( 0xfffff), shape = RoundedCornerShape(16.dp)),
                     onClick = {
-                        navController.navigate(Screens.ParkingDetailsScreen.route + "/${parking.id}")
+                        navController.navigate(Screens.ParkingDetailsScreen.route + "/${parking.id.toString()}")
                     },
 //                    modifier = Modifier.align(LineHeightStyle.Alignment.End)
                 ) {
-                    Text(text = "Details")
+                    Text(text = "Details ${parking.id.toString()}")
                 }
             }
         }

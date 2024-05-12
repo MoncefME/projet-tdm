@@ -6,5 +6,5 @@ import javax.inject.Inject
 class ParkingRepository @Inject constructor
     (private val parkingAPI: ParkingAPI) {
     suspend fun getParkingList() = parkingAPI.getParkingList()
-    suspend fun getParkingById(id: Int) = parkingAPI.getParkingById(id)
+    suspend fun getParkingById(id: String) = parkingAPI.getParkingById(id)
 }

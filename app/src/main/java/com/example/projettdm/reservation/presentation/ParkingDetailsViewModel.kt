@@ -23,7 +23,7 @@ class ParkingDetailsViewModel @Inject constructor(
 
 
 
-        fun getParkingById(id: Int) {
+        fun getParkingById(id: String) {
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
                     val response = repository.getParkingById(id)

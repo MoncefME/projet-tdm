@@ -21,7 +21,7 @@ import com.example.projettdm.parking_list.presentation.ParkingViewModel
 
 @Composable
 fun ParkingDetailsScreen(
-    navController: NavController, viewModel: ParkingDetailsViewModel,parkingId :Int
+    navController: NavController, viewModel: ParkingDetailsViewModel,parkingId :String
 ){
     val entryDate = remember { mutableStateOf("") }
     val exitDate = remember { mutableStateOf("") }
@@ -36,9 +36,10 @@ fun ParkingDetailsScreen(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        AsyncImage(model = viewModel.parking.value?.image, contentDescription = null)
-        Text(text = parkingId.toString())
-        Text(text = viewModel.parking.value.toString())
+        //AsyncImage(model = viewModel.parking.value?.image, contentDescription = null)
+        Text(text = parkingId)
+        Text(text = viewModel.parking.value?.name ?: "")
+       // Text(text = viewModel.parking.value.toString())
         Text(text = "Entry Date")
 
         OutlinedTextField(
@@ -89,10 +90,12 @@ fun ParkingDetailsScreen(
             Text(text = "Book")
         }
 
-        LaunchedEffect (key1 = parkingId){
-            viewModel.getParkingById(parkingId)
-        }
+
 
 
     }
+    LaunchedEffect (Unit){
+        viewModel.getParkingById(parkingId)
+    }
 }
+
