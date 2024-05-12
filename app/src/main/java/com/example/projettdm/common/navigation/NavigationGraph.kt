@@ -107,7 +107,7 @@ fun NavigationGraph(
             }
         }
 
-        composable(route = Screens.ParkingDetailsScreen.route + "/{parkingId}") {backStackEntry->
+        composable(route = Screens.ParkingDetailsScreen.route + "/{id}") {backStackEntry->
             Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
@@ -121,9 +121,9 @@ fun NavigationGraph(
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    val parkingId = backStackEntry.arguments?.getString("parkingId")
+                    val parkingId = backStackEntry.arguments?.getString("id")
                     if (parkingId != null) {
-                        ParkingDetailsScreen(navController, parkingDetailsViewModel, parkingId.toInt())
+                        ParkingDetailsScreen(navController, parkingDetailsViewModel, parkingId)
                     }
                 }
             }
