@@ -29,6 +29,7 @@ playServicesAuth = "21.1.0"
 playServicesMaps = "18.2.0"
 retrofitVersion = "2.9.0"
 material3Android = "1.2.1"
+protoliteWellKnownTypes = "18.0.0"
 
 
 [libraries]
@@ -69,6 +70,7 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypes" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
