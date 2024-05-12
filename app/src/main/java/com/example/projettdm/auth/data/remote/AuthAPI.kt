@@ -4,9 +4,7 @@ import com.example.projettdm.auth.data.remote.request.LoginBody
 import com.example.projettdm.auth.data.remote.request.SignupBody
 import com.example.projettdm.auth.data.remote.response.LoginResponse
 import com.example.projettdm.auth.data.remote.response.SignupResponse
-import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.Field
 import retrofit2.http.POST
 
 interface AuthAPI {

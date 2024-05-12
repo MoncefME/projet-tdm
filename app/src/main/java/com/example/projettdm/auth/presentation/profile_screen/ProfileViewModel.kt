@@ -24,16 +24,15 @@ class ProfileViewModel @Inject constructor(
     }
 //
     private suspend fun fetchUser() {
-        // get the user from the prefrecens
         val user = authRepository.getUserAuthToken()
         _user.value = user
     }
 
      fun logout() {
-        authRepository.logout()
-
-        _user.value = null
-    }
+         viewModelScope.launch {
+             authRepository.logout()
+         }
+     }
 }
 
 
