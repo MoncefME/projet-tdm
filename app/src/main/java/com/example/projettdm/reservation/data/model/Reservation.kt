@@ -1,5 +1,6 @@
 package com.example.projettdm.reservation.data.model
 
+import com.google.type.DateTime
 import java.util.Date
 
 data class Reservation(
@@ -8,7 +9,6 @@ data class Reservation(
     val userId: String,
     val entryTime: Date,
     val exiteTime: Date,
-    val status: String,
 
 
 )
