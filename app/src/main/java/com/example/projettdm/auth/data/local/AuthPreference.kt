@@ -23,4 +23,11 @@ class AuthPreferences(private val dataStore: DataStore<Preferences>) {
         return preferences[AUTH_KEY]?.firstOrNull()
     }
 
+    // clear auth key
+    suspend fun clearAuthToken() {
+        dataStore.edit { pref ->
+            pref.remove(AUTH_KEY)
+        }
+    }
+
 }

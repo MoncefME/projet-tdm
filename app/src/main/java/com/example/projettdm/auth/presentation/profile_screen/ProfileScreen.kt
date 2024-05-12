@@ -36,8 +36,7 @@ fun ProfileScreen(
             Button(
                 onClick = {
                     viewModel.logout()
-                    navController.navigate(Screens.SignInScreen.route)
-                          },
+                    navController.navigate(Screens.SignInScreen.route) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp)
