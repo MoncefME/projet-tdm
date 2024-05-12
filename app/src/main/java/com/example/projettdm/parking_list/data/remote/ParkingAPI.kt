@@ -19,7 +19,7 @@ interface ParkingAPI {
     suspend fun getParkingById(@Path("id") id:Int): Response<Parking>
 
     companion object {
-        const val BASE_URL = "https://ff1f-41-220-149-190.ngrok-free.app"
+        const val BASE_URL = "https://backend-bdm.onrender.com"
 
      //   const val BASE_URL = "http://10.0.2.2:3000/"
     }
