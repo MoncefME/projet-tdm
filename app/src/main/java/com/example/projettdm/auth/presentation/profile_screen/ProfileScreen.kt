@@ -28,8 +28,10 @@ fun ProfileScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.Top
     ) {
+        Text(text = "Profile Screen")
+
         if (user != null) {
-            Text(text = "Email: ${user.toString()}")
+            Text(text = "AuthToken: ${user.toString()}")
 
             Button(
                 onClick = {
@@ -44,7 +46,16 @@ fun ProfileScreen(
             }
         } else {
             // Display a loading indicator or handle when user is null
-            Text(text = "Loading...")
+            Button(
+                onClick = {
+                    navController.navigate(Screens.SignInScreen.route)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                Text(text = "Go to Sign In")
+            }
         }
     }
 }
