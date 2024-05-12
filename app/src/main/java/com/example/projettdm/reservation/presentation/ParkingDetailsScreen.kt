@@ -159,11 +159,10 @@ fun ParkingDetailsScreen(
         Button(
             onClick = {
                 val reservation = Reservation(
-                    id = "",
                     parkingId = parkingId,
-                    userId = "1",
                     entryTime = currentDate,
-                    exiteTime = currentDate)
+                    exiteTime = currentDate
+                    )
                     viewModel.addReservation(reservation)
 
                       },

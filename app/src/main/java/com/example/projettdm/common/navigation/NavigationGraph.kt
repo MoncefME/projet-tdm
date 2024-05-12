@@ -22,6 +22,7 @@ import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.parking_map.presentation.ParkingMapScreen
+import com.example.projettdm.reservation.presentation.MyReservationsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -111,7 +112,7 @@ fun NavigationGraph(
             }
         }
 
-        composable(route = Screens.ParkingDetailsScreen.route + "/{id}") {backStackEntry->
+        composable(route = Screens.ReservationsScreen.route) {backStackEntry->
             Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
@@ -125,10 +126,7 @@ fun NavigationGraph(
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    val parkingId = backStackEntry.arguments?.getString("id")
-                    if (parkingId != null) {
-                        ParkingDetailsScreen(navController, parkingDetailsViewModel, parkingId)
-                    }
+                   MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel)
                 }
             }
         }

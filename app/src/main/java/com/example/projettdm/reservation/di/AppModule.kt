@@ -2,6 +2,11 @@ package com.example.projettdm.reservation.di
 
 
 
+import android.app.Application
+import androidx.room.Room.databaseBuilder
+import androidx.room.TypeConverters
+import com.example.projettdm.reservation.data.local.ReservationDao
+import com.example.projettdm.reservation.data.local.ReservationDataBase
 import com.example.projettdm.reservation.data.remote.ReservationAPI
 import com.example.projettdm.reservation.data.repository.ReservationRepository
 import dagger.Module
@@ -25,7 +30,18 @@ object  ReservationModule{
     }
     @Provides
     @Singleton
-    fun provideReservationRepository(reservationAPI: ReservationAPI): ReservationRepository{
-        return ReservationRepository(reservationAPI)
+    fun provideReservationRepository(reservationAPI: ReservationAPI, reservationDao: ReservationDao): ReservationRepository{
+        return ReservationRepository(reservationAPI, reservationDao)
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesMovieDatabase(app: Application): ReservationDataBase {
+        return databaseBuilder(
+            app,
+            ReservationDataBase::class.java,
+            "ReservationDB"
+        ).build()
     }
 }
