@@ -47,15 +47,14 @@ class ReservationViewModel @Inject constructor(
                     }
                 }
             }
-        fun addReservation() {
+        fun addReservation(token: String ,reservation: Reservation) {
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    val response = reservationRepository.addReservation()
+                    val response = reservationRepository.addReservation(token, reservation)
                     if (response.isSuccessful) {
-                        reservation.value = response.body()!!
+                        println("success")
                     } else {
                         println("error")
-                        error.value = true
                     }
 
                     }

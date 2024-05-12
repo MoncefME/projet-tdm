@@ -1,5 +1,6 @@
 package com.example.projettdm.reservation.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,8 +29,13 @@ import coil.compose.AsyncImage
 import com.example.projettdm.R
 import com.example.projettdm.common.navigation.Screens
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
+import com.example.projettdm.reservation.data.model.Reservation
 import com.google.type.DateTime
+import java.time.LocalDate
+import java.util.Date
 
+
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun ParkingDetailsScreen(
     navController: NavController, viewModel: ParkingDetailsViewModel,parkingId :String
@@ -109,6 +115,10 @@ fun ParkingDetailsScreen(
 //
 //
 //    }
+
+
+    val currentDate: Date = Date()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -147,7 +157,16 @@ fun ParkingDetailsScreen(
 
 
         Button(
-            onClick = { /* Handle booking logic */ },
+            onClick = {
+                val reservation = Reservation(
+                    id = "",
+                    parkingId = parkingId,
+                    userId = "1",
+                    entryTime = currentDate,
+                    exiteTime = currentDate)
+                    viewModel.addReservation(reservation)
+
+                      },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
