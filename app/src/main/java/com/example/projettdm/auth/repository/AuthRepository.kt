@@ -15,8 +15,12 @@ class AuthRepository @Inject constructor(
     suspend fun login(email: String, password: String) : Resource<Unit> {
         return try {
             val response = authAPI.login(LoginBody(email, password))
-            preferences.saveAuthToken(response.token)
-            Resource.Success(Unit)
+            if(response.message === "Auth failed"){
+                return Resource.Error("Auth failed")
+            }else {
+                response.token?.let { preferences.saveAuthToken(it) }
+                Resource.Success(Unit)
+            }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "An error occurred")
         }
@@ -29,8 +33,8 @@ class AuthRepository @Inject constructor(
         lastName:String,
         phone : String,
     ) = authAPI.signup(SignupBody(email, password, firstName, lastName, phone))
-    fun logout() {
-        // logout
+    suspend fun logout() {
+        preferences.clearAuthToken()
     }
 
     suspend fun getUserAuthToken() : String {
