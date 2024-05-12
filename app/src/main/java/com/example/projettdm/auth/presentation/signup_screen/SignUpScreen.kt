@@ -24,9 +24,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun SignUpScreen(
     navController: NavController,
-    viewModel: SignUpViewModel = hiltViewModel()
+    viewModel: SignUpViewModel
 ) {
-    val googleSignInState = viewModel.googleState.value
+//    val googleSignInState = viewModel.googleState.value
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
@@ -84,7 +84,7 @@ fun SignUpScreen(
         Button(
             onClick = {
                 scope.launch {
-                    viewModel.registerUser(email, password)
+                    viewModel.registerUser(email, password,"test","test","test")
                 }
             },
             modifier = Modifier
@@ -128,9 +128,9 @@ fun SignUpScreen(
         ) {
             IconButton(onClick = {
                 // TODO Later : Handle Google Auth
-                scope.launch {
-                    viewModel.googleSignIn("google")
-                }
+//                scope.launch {
+//                    viewModel.googleSignIn("google")
+//                }
                 navController.navigate(Screens.ProfileScreen.route)
             }) {
                 Icon(
@@ -140,11 +140,11 @@ fun SignUpScreen(
                 )
             }
         }
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            if (googleSignInState.loading || state.value?.isLoading == true){
-                CircularProgressIndicator()
-            }
-        }
+//        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+//            if (googleSignInState.loading || state.value?.isLoading == true){
+//                CircularProgressIndicator()
+//            }
+//        }
     }
 
 
@@ -171,13 +171,13 @@ fun SignUpScreen(
     }
 
     // LaunchedEffect block to observe changes in the Google sign-in success state
-    LaunchedEffect(key1 = googleSignInState.success) {
-        scope.launch {
-            if (googleSignInState.success != null) {
-                Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
-                navController.navigate(Screens.ProfileScreen.route)
-            }
-        }
-    }
+//    LaunchedEffect(key1 = googleSignInState.success) {
+//        scope.launch {
+//            if (googleSignInState.success != null) {
+//                Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
+//                navController.navigate(Screens.ProfileScreen.route)
+//            }
+//        }
+//    }
 
 }

@@ -20,7 +20,7 @@ fun ProfileScreen(
     navController: NavController,
     viewModel: ProfileViewModel = hiltViewModel(),
 ) {
-    val user by viewModel.user.collectAsState()
+//    val user by viewModel.user.collectAsState()
 
     Column(
         modifier = Modifier
@@ -28,23 +28,34 @@ fun ProfileScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.Top
     ) {
-        if (user != null) {
-            Text(text = "Email: ${user.toString()}")
-
-            Button(
-                onClick = {
-                    viewModel.logout()
-                    navController.navigate(Screens.SignInScreen.route)
-                          },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp)
-            ) {
-                Text(text = "Logout")
-            }
-        } else {
-            // Display a loading indicator or handle when user is null
-            Text(text = "Loading...")
+        Text(text = "Profile Screen")
+        Button(
+            onClick = {
+                navController.navigate(Screens.SignInScreen.route)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+        ) {
+            Text(text = "Go to Sign In")
         }
+//        if (user != null) {
+//            Text(text = "Email: ${user.toString()}")
+//
+//            Button(
+//                onClick = {
+//                    viewModel.logout()
+//                    navController.navigate(Screens.SignInScreen.route)
+//                          },
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(top = 16.dp)
+//            ) {
+//                Text(text = "Logout")
+//            }
+//        } else {
+//            // Display a loading indicator or handle when user is null
+//            Text(text = "Loading...")
+//        }
     }
 }
