@@ -17,6 +17,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -118,7 +120,8 @@ fun DisplayError(viewModel: ParkingViewModel){
         modifier = Modifier.fillMaxWidth()
     ) {
 
-        if(viewModel.error.value){
+        val err by  viewModel.error.collectAsState()
+        if(err){
             Toast.makeText(LocalContext.current, "parking list is empty", Toast.LENGTH_SHORT).show()
 
         }

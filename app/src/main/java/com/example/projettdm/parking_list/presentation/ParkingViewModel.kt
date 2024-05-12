@@ -7,6 +7,7 @@ import com.example.projettdm.parking_list.data.remote.response.Parking
 import com.example.projettdm.parking_list.data.repository.ParkingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -20,7 +21,8 @@ class ParkingViewModel @Inject constructor(
     ViewModel() {
 
     val parkings = mutableStateOf((listOf<Parking>()))
-    val error = mutableStateOf(false)
+    //val error = mutableStateOf(false)
+    val error = MutableStateFlow(false)
 
     init{
        getParkingList()
