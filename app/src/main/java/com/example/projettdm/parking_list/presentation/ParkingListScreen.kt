@@ -65,7 +65,7 @@ fun ParkingCard(parking: Parking, navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(color = Color(0xFF613EEA), shape = RoundedCornerShape(16.dp))
+            .background(color = Color(0xFF977897), shape = RoundedCornerShape(16.dp))
     ) {
         Row(
             modifier = Modifier

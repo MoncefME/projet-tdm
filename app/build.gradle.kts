@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.protolite.well.known.types)
 
     // Testing
     testImplementation(libs.junit)
