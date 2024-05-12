@@ -29,6 +29,10 @@ fun SignUpScreen(
 //    val googleSignInState = viewModel.googleState.value
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var firstName by rememberSaveable { mutableStateOf("") }
+    var lastName by rememberSaveable { mutableStateOf("") }
+    var phone by rememberSaveable { mutableStateOf("") }
+
 
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -81,11 +85,60 @@ fun SignUpScreen(
                 Text(text = "Password")
             }
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = firstName,
+            onValueChange = {
+                firstName = it
+            },
+            shape = RoundedCornerShape(8.dp),
+            singleLine = true,
+            placeholder = {
+                Text(text = "First Name")
+            }
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = lastName,
+            onValueChange = {
+                lastName = it
+            },
+            shape = RoundedCornerShape(8.dp),
+            singleLine = true,
+            placeholder = {
+                Text(text = "Last Name")
+            }
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = phone,
+            onValueChange = {
+                phone = it
+            },
+            shape = RoundedCornerShape(8.dp),
+            singleLine = true,
+            placeholder = {
+                Text(text = "Phone")
+            }
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Button(
             onClick = {
                 scope.launch {
-                    viewModel.registerUser(email, password,"test","test","test")
+                    viewModel.registerUser(email, password, firstName, lastName, phone)
+                    if (state.value?.isSuccess == true) {
+                        navController.navigate(Screens.ProfileScreen.route)
+                    }
                 }
+
             },
             modifier = Modifier
                 .fillMaxWidth()

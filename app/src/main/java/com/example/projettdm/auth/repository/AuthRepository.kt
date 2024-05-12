@@ -32,4 +32,10 @@ class AuthRepository @Inject constructor(
     fun logout() {
         // logout
     }
+
+    suspend fun getUserAuthToken() : String {
+        val token = preferences.getAuthToken() ?: ""
+        Log.d("getUserAuthToken", token)
+        return token
+    }
 }
