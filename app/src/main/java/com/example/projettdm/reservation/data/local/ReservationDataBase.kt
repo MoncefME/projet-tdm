@@ -22,10 +22,39 @@ class Converters {
     }
 }
 
+//@Database(entities = [Reservation::class], version = 6)
+//@TypeConverters(Converters::class)
+//abstract class ReservationDataBase: RoomDatabase() {
+//    abstract val  reservationDao: ReservationDao
+//
+//
+//}
+
+
 @Database(entities = [Reservation::class], version = 4)
 @TypeConverters(Converters::class)
 abstract class ReservationDataBase: RoomDatabase() {
-    abstract val  reservationDao: ReservationDao
+    abstract fun getReservationDao(): ReservationDao
 
+    companion object {
+        var INSTANCE: ReservationDataBase? = null
+        fun getInstance(context: Context): ReservationDataBase {
+            synchronized(this) {
+                var instance = INSTANCE
 
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context,
+                        ReservationDataBase::class.java,
+                        "ReservationDB"
+                    )
+                        .fallbackToDestructiveMigration() // Add this line for fallback to destructive migration
+                        .build()
+                    INSTANCE = instance
+                }
+                return instance
+            }
+        }
+
+    }
 }

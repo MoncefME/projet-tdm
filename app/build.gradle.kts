@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+
+    alias(libs.plugins.ksp)
+
+
+
+
 //    alias(libs.plugins.google.services)
 }
 
@@ -122,5 +128,7 @@ dependencies {
     //coil
     implementation(libs.coil.compose)
 
-
+    annotationProcessor(libs.compiler)
+    implementation (libs.androidx.room.ktx)
+    testImplementation (libs.androidx.room.testing)
 }

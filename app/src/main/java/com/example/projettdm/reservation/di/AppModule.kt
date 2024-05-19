@@ -3,15 +3,15 @@ package com.example.projettdm.reservation.di
 
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room.databaseBuilder
-import androidx.room.TypeConverters
 import com.example.projettdm.reservation.data.local.ReservationDao
 import com.example.projettdm.reservation.data.local.ReservationDataBase
 import com.example.projettdm.reservation.data.remote.ReservationAPI
-import com.example.projettdm.reservation.data.repository.ReservationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,20 +28,36 @@ object  ReservationModule{
             .build()
             .create(ReservationAPI::class.java)
     }
+
     @Provides
-    @Singleton
-    fun provideReservationRepository(reservationAPI: ReservationAPI, reservationDao: ReservationDao): ReservationRepository{
-        return ReservationRepository(reservationAPI, reservationDao)
+    fun provideReservationDao(db: ReservationDataBase): ReservationDao {
+        return db.getReservationDao()
     }
+//    @Provides
+//    @Singleton
+//    fun provideReservationRepository(reservationAPI: ReservationAPI, reservationDataBase: ReservationDataBase): ReservationRepository{
+//        return ReservationRepository(reservationAPI, reservationDataBase )
+//    }
 
+
+//    @Provides
+//    @Singleton
+//    fun providesReservationDatabase(app: Application): ReservationDataBase {
+//        return databaseBuilder(
+//            app,
+//            ReservationDataBase::class.java,
+//            "ReservationDB"
+//        ).build()
+//    }
 
     @Provides
     @Singleton
-    fun providesMovieDatabase(app: Application): ReservationDataBase {
+    fun provideDatabase(@ApplicationContext appContext: Context): ReservationDataBase {
         return databaseBuilder(
-            app,
+            appContext,
             ReservationDataBase::class.java,
-            "ReservationDB"
+            "reservation_database"
         ).build()
     }
+
 }

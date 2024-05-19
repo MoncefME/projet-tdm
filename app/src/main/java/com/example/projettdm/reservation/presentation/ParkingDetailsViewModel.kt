@@ -1,9 +1,6 @@
 package com.example.projettdm.reservation.presentation
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -24,7 +21,7 @@ class ParkingDetailsViewModel @Inject constructor(
 
     private val repository: ParkingRepository,
 
-) : ViewModel()  {
+    ) : ViewModel()  {
     var allReservations = mutableStateOf(listOf<Reservation>())
 
     //var parkingId = mutableIntStateOf(0)
@@ -50,7 +47,7 @@ class ParkingDetailsViewModel @Inject constructor(
     fun addReservation(reservation: Reservation) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJFbnZAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI2NjM4ZjhhYWY5OWNlOTE5ZDg4MTQxMGEiLCJpYXQiOjE3MTU1MDc5ODUsImV4cCI6MTcxNTUxMTU4NX0.gnTLImuDF5BXcBzpVLQQ7vSniPXvEaVABoJ_xXY2rvg";
+                val token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJFbnZAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI2NjM4ZjhhYWY5OWNlOTE5ZDg4MTQxMGEiLCJpYXQiOjE3MTYxMjc5NTEsImV4cCI6MTcxNjEzMTU1MX0.dNP1YIMAsXR9GWqYz2HXJ2DSQjMubB3PyeRssk0u9Nc";
                 val response = reservationRepository.addReservation(token, reservation)
                 print("Response: $response")
                 if (response.isSuccessful) {
@@ -77,7 +74,7 @@ class ParkingDetailsViewModel @Inject constructor(
     fun getAllReservations(){
         viewModelScope.launch{
             withContext(Dispatchers.IO){
-                allReservations.value =  reservationRepository.getAllReservation()
+                allReservations.value =  reservationRepository.getAllReservations()
 
             }
 
