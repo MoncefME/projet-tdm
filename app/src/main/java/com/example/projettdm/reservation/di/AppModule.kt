@@ -8,6 +8,7 @@ import androidx.room.Room.databaseBuilder
 import com.example.projettdm.reservation.data.local.ReservationDao
 import com.example.projettdm.reservation.data.local.ReservationDataBase
 import com.example.projettdm.reservation.data.remote.ReservationAPI
+import com.example.projettdm.reservation.data.repository.ReservationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,25 +30,9 @@ object  ReservationModule{
             .create(ReservationAPI::class.java)
     }
 
-    @Provides
-    fun provideReservationDao(db: ReservationDataBase): ReservationDao {
-        return db.getReservationDao()
-    }
 //    @Provides
-//    @Singleton
-//    fun provideReservationRepository(reservationAPI: ReservationAPI, reservationDataBase: ReservationDataBase): ReservationRepository{
-//        return ReservationRepository(reservationAPI, reservationDataBase )
-//    }
-
-
-//    @Provides
-//    @Singleton
-//    fun providesReservationDatabase(app: Application): ReservationDataBase {
-//        return databaseBuilder(
-//            app,
-//            ReservationDataBase::class.java,
-//            "ReservationDB"
-//        ).build()
+//    fun provideReservationDao(db: ReservationDataBase): ReservationDao {
+//        return db.reservationDao
 //    }
 
     @Provides
@@ -57,7 +42,18 @@ object  ReservationModule{
             appContext,
             ReservationDataBase::class.java,
             "reservation_database"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideReservationRepository(
+        reservationAPI: ReservationAPI,
+        reservationDataBase: ReservationDataBase
+    ): ReservationRepository {
+        return ReservationRepository(reservationAPI, reservationDataBase)
     }
 
 }

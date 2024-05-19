@@ -22,7 +22,6 @@ interface ReservationAPI {
     suspend fun getReservationById(@Path("id") id:String): Response<Reservation>
 
     @GET("/reservations/{userId}")
-
     suspend fun getReservationsByUserId(@Path("userId") userId:String): Response<List<Reservation>>
 
 

@@ -7,12 +7,10 @@ import com.example.projettdm.reservation.data.remote.ReservationAPI
 import javax.inject.Inject
 
 
-class ReservationRepository @Inject constructor
-    (private val reservationAPI: ReservationAPI,
-     private val reservationDao: ReservationDao
-            )
-
-    {
+class ReservationRepository @Inject constructor(
+    private val reservationAPI: ReservationAPI,
+    private val reservationDataBase: ReservationDataBase
+) {
 
         //Remote API
         suspend fun addReservation(token: String, reservation: Reservation ) = reservationAPI.addReservation(token, reservation)
@@ -20,9 +18,9 @@ class ReservationRepository @Inject constructor
 
         //Local database
         fun getAllReservations():List<Reservation>{
-            return reservationDao.getAllReservations()
+            return reservationDataBase.reservationDao.getAllReservations()
         }
         fun addLocalReservation(res: Reservation){
-            reservationDao.addLocalReservation(res)
+            reservationDataBase.reservationDao.addLocalReservation(res)
         }
 }

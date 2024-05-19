@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
 
+
     alias(libs.plugins.ksp)
 
 
@@ -81,7 +82,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    annotationProcessor(libs.androidx.room.compiler)
+//    annotationProcessor(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -100,6 +102,7 @@ dependencies {
     kapt(libs.hilt.compiler)
     kapt(libs.androidx.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)

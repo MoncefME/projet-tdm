@@ -112,7 +112,7 @@ fun NavigationGraph(
             }
         }
 
-        composable(route = Screens.ReservationsScreen.route) {backStackEntry->
+        composable(route = Screens.ParkingDetailsScreen.route + "/{id}") {backStackEntry->
             Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
@@ -126,10 +126,32 @@ fun NavigationGraph(
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                   MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel)
+                    val parkingId = backStackEntry.arguments?.getString("id")
+                    if (parkingId != null) {
+                        ParkingDetailsScreen(navController, parkingDetailsViewModel, parkingId)
+                    }
                 }
             }
         }
+
+//        composable(route = Screens.ReservationsScreen.route) {backStackEntry->
+//            Scaffold(
+//                bottomBar = {
+//                    BottomNavigationBar(
+//                        bottomNavController = navController,
+//                        screenIndex = 2
+//                    )
+//                }
+//            ) {
+//                Box(
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .padding(it)
+//                ) {
+//                   MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel)
+//                }
+//            }
+//        }
     }
 }
 

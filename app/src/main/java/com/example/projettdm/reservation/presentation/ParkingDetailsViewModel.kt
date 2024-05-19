@@ -91,12 +91,12 @@ class ParkingDetailsViewModel @Inject constructor(
         }
     }
 
-    class Factory(private val reservationRepository: ReservationRepository, private val parkingRepository:ParkingRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ParkingDetailsViewModel(reservationRepository, parkingRepository ) as T
-
-        }
-    }
+//    class Factory(private val reservationRepository: ReservationRepository, private val parkingRepository:ParkingRepository) : ViewModelProvider.Factory {
+//        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//            return ParkingDetailsViewModel(reservationRepository, parkingRepository ) as T
+//
+//        }
+//    }
 
 
 }
