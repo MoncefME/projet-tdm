@@ -47,7 +47,7 @@ class ParkingDetailsViewModel @Inject constructor(
     fun addReservation(reservation: Reservation) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJFbnZAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI2NjM4ZjhhYWY5OWNlOTE5ZDg4MTQxMGEiLCJpYXQiOjE3MTYxMjc5NTEsImV4cCI6MTcxNjEzMTU1MX0.dNP1YIMAsXR9GWqYz2HXJ2DSQjMubB3PyeRssk0u9Nc";
+                val token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthX21vdXNzYW91aUBlc2kuZHoiLCJ1c2VySWQiOiI2NjNkZTI1NTEwODgzMDVhMDM0NGQ5MTMiLCJpYXQiOjE3MTYyMDM1NjksImV4cCI6MTcxNjIwNzE2OX0.QbiSKc5fuIzTRYuNotipn0cuE3szEWyiKLoX4SVwpVs";
                 val response = reservationRepository.addReservation(token, reservation)
                 print("Response: $response")
                 if (response.isSuccessful) {
