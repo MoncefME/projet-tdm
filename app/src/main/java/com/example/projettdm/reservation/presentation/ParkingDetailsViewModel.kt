@@ -1,9 +1,11 @@
 package com.example.projettdm.reservation.presentation
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.projettdm.auth.data.local.AuthPreferences
 import com.example.projettdm.parking_list.data.remote.response.Parking
 import com.example.projettdm.parking_list.data.repository.ParkingRepository
 import com.example.projettdm.reservation.data.model.Reservation
@@ -18,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ParkingDetailsViewModel @Inject constructor(
     private val reservationRepository: ReservationRepository,
-
+    private val preferences: AuthPreferences,
     private val repository: ParkingRepository,
 
     ) : ViewModel()  {
@@ -47,7 +49,8 @@ class ParkingDetailsViewModel @Inject constructor(
     fun addReservation(reservation: Reservation) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthX21vdXNzYW91aUBlc2kuZHoiLCJ1c2VySWQiOiI2NjNkZTI1NTEwODgzMDVhMDM0NGQ5MTMiLCJpYXQiOjE3MTYyMDM1NjksImV4cCI6MTcxNjIwNzE2OX0.QbiSKc5fuIzTRYuNotipn0cuE3szEWyiKLoX4SVwpVs";
+
+                val token = "Bearer ${preferences.getAuthToken() ?: ""}"
                 val response = reservationRepository.addReservation(token, reservation)
                 print("Response: $response")
                 if (response.isSuccessful) {
