@@ -47,7 +47,7 @@ class ParkingDetailsViewModel @Inject constructor(
     fun addReservation(reservation: Reservation) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJFbnZAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI2NjM4ZjhhYWY5OWNlOTE5ZDg4MTQxMGEiLCJpYXQiOjE3MTYxMjc5NTEsImV4cCI6MTcxNjEzMTU1MX0.dNP1YIMAsXR9GWqYz2HXJ2DSQjMubB3PyeRssk0u9Nc";
+                val token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthX21vdXNzYW91aUBlc2kuZHoiLCJ1c2VySWQiOiI2NjNkZTI1NTEwODgzMDVhMDM0NGQ5MTMiLCJpYXQiOjE3MTY2NzkwMzMsImV4cCI6MTcxNjY4MjYzM30.m8c9eNkpctwfggKocNvaMIXIiBsTlCrGlAuUMgLmc1o";
                 val response = reservationRepository.addReservation(token, reservation)
                 print("Response: $response")
                 if (response.isSuccessful) {
@@ -91,12 +91,12 @@ class ParkingDetailsViewModel @Inject constructor(
         }
     }
 
-    class Factory(private val reservationRepository: ReservationRepository, private val parkingRepository:ParkingRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ParkingDetailsViewModel(reservationRepository, parkingRepository ) as T
-
-        }
-    }
+//    class Factory(private val reservationRepository: ReservationRepository, private val parkingRepository:ParkingRepository) : ViewModelProvider.Factory {
+//        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//            return ParkingDetailsViewModel(reservationRepository, parkingRepository ) as T
+//
+//        }
+//    }
 
 
 }
