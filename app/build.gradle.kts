@@ -3,6 +3,13 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+
+
+    alias(libs.plugins.ksp)
+
+
+
+
 //    alias(libs.plugins.google.services)
 }
 
@@ -66,6 +73,8 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.protolite.well.known.types)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.runtime)
 
     // Testing
     testImplementation(libs.junit)
@@ -73,6 +82,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+//    annotationProcessor(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -90,7 +101,9 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     kapt(libs.androidx.hilt.compiler)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
@@ -119,5 +132,7 @@ dependencies {
     //coil
     implementation(libs.coil.compose)
 
-
+    annotationProcessor(libs.compiler)
+    implementation (libs.androidx.room.ktx)
+    testImplementation (libs.androidx.room.testing)
 }

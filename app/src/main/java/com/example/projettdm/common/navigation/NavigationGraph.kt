@@ -22,6 +22,7 @@ import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.parking_map.presentation.ParkingMapScreen
+import com.example.projettdm.reservation.presentation.MyReservationsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -132,6 +133,25 @@ fun NavigationGraph(
                 }
             }
         }
+
+//        composable(route = Screens.ReservationsScreen.route) {backStackEntry->
+//            Scaffold(
+//                bottomBar = {
+//                    BottomNavigationBar(
+//                        bottomNavController = navController,
+//                        screenIndex = 2
+//                    )
+//                }
+//            ) {
+//                Box(
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .padding(it)
+//                ) {
+//                   MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel)
+//                }
+//            }
+//        }
     }
 }
 
