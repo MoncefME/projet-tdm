@@ -1,19 +1,12 @@
 package com.example.projettdm.reservation.presentation
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.MaterialTheme
@@ -21,22 +14,14 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.painter.BitmapPainter
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -46,15 +31,8 @@ import com.example.projettdm.common.navigation.Screens
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.reservation.data.model.Reservation
 import com.google.type.DateTime
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.EncodeHintType
-import com.google.zxing.qrcode.QRCodeWriter
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import java.time.LocalDate
 import java.util.Date
-
-
-
 
 
 @SuppressLint("SuspiciousIndentation")
@@ -69,8 +47,75 @@ fun ParkingDetailsScreen(
     val dateTime = remember { mutableStateOf("") }
 
     val price = "100$"
-    val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
-    val (reservationId, setReservationId) = remember { mutableStateOf("") }
+
+
+
+//    Column(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(16.dp)
+//    ) {
+//        AsyncImage(model = viewModel.parking.value?.image, contentDescription = null)
+//       // Text(text = parkingId)
+//        Text(text = viewModel.parking.value?.name ?: "")
+//        Text(text = viewModel.parking.value?.city ?: "")
+//
+//
+//        Text(text = "Entry Date")
+//
+//        OutlinedTextField(
+//            value = entryDate.value,
+//            onValueChange = { entryDate.value = it },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 8.dp)
+//        )
+//
+//        Text(text = "Entry Hour")
+//        OutlinedTextField(
+//            value = entryHour.value,
+//            onValueChange = { entryHour.value = it },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 8.dp)
+//        )
+//
+//        Text(text = "Exit Date")
+//        OutlinedTextField(
+//            value = exitDate.value,
+//            onValueChange = { exitDate.value = it },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 8.dp)
+//        )
+//
+//        Text(text = "Exit Hour")
+//        OutlinedTextField(
+//            value = exitHour.value,
+//            onValueChange = { exitHour.value = it },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 8.dp)
+//        )
+//
+//        Text(text = "Price: $price", fontWeight = FontWeight.Bold, fontSize = 18.sp, modifier = Modifier.padding(bottom = 8.dp))
+//
+//        Button(
+//            onClick = {
+//
+//            },
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(bottom = 8.dp)
+//        ) {
+//            Text(text = "Book")
+//        }
+//
+//
+//
+//
+//    }
+
 
     val currentDate: Date = Date()
 
@@ -83,7 +128,6 @@ fun ParkingDetailsScreen(
      //   AsyncImage(model = viewModel.parking.value?.image, contentDescription = null)
 
         // Display parking name (assuming `viewModel.parking.value?.name` is not null)
-
         Text(text = viewModel.parking.value?.name ?: "", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
 
         // Display parking city (assuming `viewModel.parking.value?.city` is not null)
@@ -119,26 +163,15 @@ fun ParkingDetailsScreen(
                     entryTime = currentDate,
                     exiteTime = currentDate
                     )
-                   // viewModel.addReservation(reservation)
-                viewModel.addReservation(reservation) { id ->
-                    setReservationId(id)
-                    setShowDialog(true)
-                    Log.d("ParkingDetailsScreen", "Reservation ID: $id, Show Dialog: $showDialog")
-
-                }
+                    viewModel.addReservation(reservation)
 
                       },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
-                .background(color = Color(0xFF977897), shape = MaterialTheme.shapes.medium),
+                .background(color= Color(0xFF977897),shape = MaterialTheme.shapes.medium),
         ) {
             Text(text = "Book")
-        }
-        Text(text = "Reservation ID: $reservationId Show Dialog: $showDialog")
-       /// AlertDialog(onDismissRequest = { /*TODO*/ }, title = {"test diaglog"},confirmButton = { /*TODO*/ })
-        if (showDialog) {
-            QrCodePopup(content = reservationId, onDismiss = { setShowDialog(false) })
         }
     }
 
@@ -146,31 +179,4 @@ fun ParkingDetailsScreen(
         viewModel.getParkingById(parkingId)
     }
 }
-@Composable
-fun QrCodePopup(content: String, onDismiss: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(text = "Reservation QR Code") },
-        text = {
-            QrCodeDisplay(content = content)
-        },
-        confirmButton = {
-            Button(onClick = onDismiss) {
-                Text("OK")
-            }
-        }
-    )
-}
-
-@Composable
-fun QrCodeScreen(content: String) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        QrCodeDisplay(content = content)
-    }
-}
-
 
