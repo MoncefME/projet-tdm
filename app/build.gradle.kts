@@ -135,4 +135,10 @@ dependencies {
     annotationProcessor(libs.compiler)
     implementation (libs.androidx.room.ktx)
     testImplementation (libs.androidx.room.testing)
+
+    //QR code
+    implementation(libs.zxing)
+    implementation(libs.zxing2)
+
+
 }
