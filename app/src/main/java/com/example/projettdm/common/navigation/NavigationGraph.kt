@@ -134,26 +134,25 @@ fun NavigationGraph(
             }
         }
 
-//        composable(route = Screens.ReservationsScreen.route) {backStackEntry->
-//            Scaffold(
-//                bottomBar = {
-//                    BottomNavigationBar(
-//                        bottomNavController = navController,
-//                        screenIndex = 2
-//                    )
-//                }
-//            ) {
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .padding(it)
-//                ) {
-//                   MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel)
-//                }
-//            }
-//        }
+        composable(route = Screens.ReservationsScreen.route) {backStackEntry->
+            Scaffold(
+                bottomBar = {
+                    BottomNavigationBar(
+                        bottomNavController = navController,
+                        screenIndex = 2
+                    )
+                }
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(it)
+                ) {
+                    MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel, navController = navController)
+                }
+            }
+        }
     }
 }
-
 
 
