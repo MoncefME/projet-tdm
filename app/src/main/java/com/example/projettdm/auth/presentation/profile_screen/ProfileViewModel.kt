@@ -14,8 +14,8 @@ class ProfileViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    private val _user = MutableStateFlow<Any?>(null)
-    val user: StateFlow<Any?> = _user
+    private val _user = MutableStateFlow<AuthRepository.UserInfo?>(null)
+    val user: StateFlow<AuthRepository.UserInfo?> = _user
 //
     init {
         viewModelScope.launch {
@@ -24,8 +24,8 @@ class ProfileViewModel @Inject constructor(
     }
 //
     private suspend fun fetchUser() {
-        val user = authRepository.getUserAuthToken()
-        _user.value = user
+        val user = authRepository.getUserInfo()
+        _user.value = user.data
     }
 
      fun logout() {

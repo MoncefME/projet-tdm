@@ -138,4 +138,7 @@ dependencies {
     annotationProcessor(libs.compiler)
     implementation (libs.androidx.room.ktx)
     testImplementation (libs.androidx.room.testing)
+
+    //jwt-decoder
+    implementation(libs.jwtdecode)
 }

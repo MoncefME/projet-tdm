@@ -28,10 +28,10 @@ fun ProfileScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.Top
     ) {
-        Text(text = "Profile Screen")
+        Text(text = "Profile Screen ${user?.email} hi")
 
         if (user != null) {
-            Text(text = "AuthToken: ${user.toString()}")
+            Text(text = "AuthToken: ${user!!.userId} , ${user!!.email}")
 
             Button(
                 onClick = {
