@@ -107,7 +107,7 @@ fun NavigationGraph(
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    ParkingMapScreen(navController)
+                    ParkingMapScreen(navController, parkingViewModel)
                 }
             }
         }

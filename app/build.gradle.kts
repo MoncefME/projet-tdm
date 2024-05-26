@@ -75,6 +75,9 @@ dependencies {
     implementation(libs.protolite.well.known.types)
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.play.services.location)
+
+
 
     // Testing
     testImplementation(libs.junit)
