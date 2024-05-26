@@ -2,12 +2,16 @@ package com.example.projettdm.auth.repository
 
 import android.util.Log
 import com.auth0.android.jwt.JWT
+
 import com.example.projettdm.auth.data.local.AuthPreferences
 import com.example.projettdm.auth.data.remote.AuthAPI
 import com.example.projettdm.auth.data.remote.request.LoginBody
 import com.example.projettdm.auth.data.remote.request.SignupBody
+import com.example.projettdm.auth.data.remote.response.UserInfoResponse
 import com.example.projettdm.common.utils.Resource
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -40,39 +44,14 @@ class AuthRepository @Inject constructor(
         preferences.clearAuthToken()
     }
 
-    suspend fun getUserAuthToken() : String {
-        val token = preferences.getAuthToken() ?: ""
-        Log.d("getUserAuthToken", token)
-        return token
-    }
-
-    data class UserInfo(val userId: Int, val email: String)
-
-
-    suspend fun getUserInfo(): Resource<UserInfo> {
+    suspend fun getUserInfo(): UserInfoResponse {
         return withContext(Dispatchers.IO) {
-            try {
-                val currentToken = preferences.getAuthToken()
-                if (currentToken.isNullOrBlank()) {
-                    return@withContext Resource.Error<UserInfo>("Token is null or blank")
-                }
-
-                val jwt = JWT(currentToken)
-                val userId = jwt.getClaim("userId").asInt()
-                val userEmail = jwt.getClaim("email").asString()
-
-                if (userId == null) {
-                    return@withContext Resource.Error<UserInfo>("Invalid or missing userId claim")
-                }
-
-                if (userEmail.isNullOrBlank()) {
-                    return@withContext Resource.Error<UserInfo>("Invalid or missing email claim")
-                }
-
-                Resource.Success(UserInfo(userId, userEmail))
-            } catch (e: Exception) {
-                Resource.Error<UserInfo>(e.message ?: "An error occurred")
-            }
+            val token = preferences.getAuthToken() ?: ""
+            val user = authAPI.getUserInfo("Bearer $token")
+            preferences.saveUserInfos(user)
+            user
         }
     }
+
+
 }

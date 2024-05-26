@@ -141,4 +141,8 @@ dependencies {
 
     //jwt-decoder
     implementation(libs.jwtdecode)
+
+    //QR code
+    implementation(libs.zxing)
+    implementation(libs.zxing2)
 }
