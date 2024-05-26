@@ -139,9 +139,10 @@ dependencies {
     implementation (libs.androidx.room.ktx)
     testImplementation (libs.androidx.room.testing)
 
+    //jwt-decoder
+    implementation(libs.jwtdecode)
+
     //QR code
     implementation(libs.zxing)
     implementation(libs.zxing2)
-
-
 }

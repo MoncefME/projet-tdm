@@ -172,4 +172,3 @@ fun QrCodeScreen(content: String) {
         QrCodeDisplay(content = content)
     }
 }
-

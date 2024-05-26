@@ -94,4 +94,3 @@ fun QrCodeScreen() {
 fun QrCodeScreenPreview() {
     QrCodeScreen()
 }
-
