@@ -34,6 +34,7 @@ import com.example.projettdm.R
 import com.example.projettdm.common.navigation.Screens
 import com.example.projettdm.parking_list.data.remote.ParkingAPI
 import com.example.projettdm.parking_list.data.remote.response.Parking
+import com.example.projettdm.parking_list.presentation.components.ParkingItemCard
 import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
 
 @SuppressLint("UnrememberedMutableState")
@@ -45,15 +46,16 @@ fun ParkingListScreen(
         modifier = Modifier.fillMaxWidth()
     ) {
         DisplayError(viewModel = viewModel)
-        Text(text = "Parking List Screen new")
+//        Text(text = "Parking List Screen new")
         LazyColumn {
 
             items(viewModel.parkings.value) { parking ->
-                ParkingCard(parking = parking, navController = navController)
+//                ParkingCard(parking = parking, navController = navController)
+                ParkingItemCard(parking = parking, navController = navController)
             }
-            items(viewModel.parkings.value) { parking ->
-                ParkingCard(parking = parking, navController = navController)
-            }
+//            items(viewModel.parkings.value) { parking ->
+//                ParkingCard(parking = parking, navController = navController)
+//            }
         }
 
     }
