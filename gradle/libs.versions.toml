@@ -23,7 +23,7 @@ hiltAndroid = "2.50"
 hiltCompiler = "2.50"
 hiltCompilerVersion = "1.2.0"
 loggingInterceptor = "4.10.0"
-mapsCompose = "2.1.0"
+mapsCompose = "4.3.3"
 navigationCompose = "2.7.7"
 okhttpVersion = "4.11.0"
 playServicesAuth = "21.1.1"
@@ -35,6 +35,8 @@ roomCommon = "2.6.1"
 roomRuntime = "2.6.1"
 roomCompiler = "2.6.1"
 ksp = "1.9.21-1.0.15"
+playServicesLocation = "21.2.0"
+
 
 
 
@@ -83,6 +85,11 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomRuntime" }
+ zxing = { module = "com.google.zxing:core", version = "3.5.1" }
+zxing2= { module = "com.journeyapps:zxing-android-embedded", version = "4.3.0" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
