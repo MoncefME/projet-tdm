@@ -1,6 +1,5 @@
 package com.example.projettdm.reservation.presentation
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +25,6 @@ class ParkingDetailsViewModel @Inject constructor(
     ) : ViewModel()  {
     var allReservations = mutableStateOf(listOf<Reservation>())
 
-
     //var parkingId = mutableIntStateOf(0)
         val parking = mutableStateOf<Parking?>(null)
         val error = mutableStateOf(false)
@@ -47,15 +45,13 @@ class ParkingDetailsViewModel @Inject constructor(
                     }
                 }
             }
-
-    fun addReservation(reservation: Reservation,  onSuccess: (String) -> Unit) {
+    fun addReservation(reservation: Reservation) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val token = "Bearer " + prefrences.getAuthToken()
                 val response = reservationRepository.addReservation(token, reservation)
                 print("Response: $response")
                 if (response.isSuccessful) {
-
                     val data = response.body()
                     if (data != null) {
                         reservation.id = data.id
@@ -63,15 +59,8 @@ class ParkingDetailsViewModel @Inject constructor(
                         reservation.userId = data.userId
                     }
 
-
                     addLocalReservation(reservation)
-                    withContext(Dispatchers.Main) {
-                        onSuccess(reservation.id)
-                    }
                     println("success")
-                    Log.d("String", "succes inserting locally")
-
-
                 } else {
                     println("error")
                 }
@@ -87,8 +76,11 @@ class ParkingDetailsViewModel @Inject constructor(
         viewModelScope.launch{
             withContext(Dispatchers.IO){
                 allReservations.value =  reservationRepository.getAllReservations()
+
             }
+
         }
+
     }
 
     //add a reservation to local database once the resevation is sucesssfully inserted in the remote database
