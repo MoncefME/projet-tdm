@@ -26,6 +26,7 @@ class ParkingDetailsViewModel @Inject constructor(
     ) : ViewModel()  {
     var allReservations = mutableStateOf(listOf<Reservation>())
 
+
     //var parkingId = mutableIntStateOf(0)
         val parking = mutableStateOf<Parking?>(null)
         val error = mutableStateOf(false)
@@ -46,6 +47,7 @@ class ParkingDetailsViewModel @Inject constructor(
                     }
                 }
             }
+
     fun addReservation(reservation: Reservation,  onSuccess: (String) -> Unit) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -85,11 +87,8 @@ class ParkingDetailsViewModel @Inject constructor(
         viewModelScope.launch{
             withContext(Dispatchers.IO){
                 allReservations.value =  reservationRepository.getAllReservations()
-
             }
-
         }
-
     }
 
     //add a reservation to local database once the resevation is sucesssfully inserted in the remote database
