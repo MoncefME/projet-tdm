@@ -38,7 +38,7 @@ fun BottomNavigationBar(
             icon = Icons.Rounded.Search
         ),
         BottomItem(
-            title = "Reservations",
+            title = "Parking",
             icon = Icons.Rounded.ShoppingCart
         ),
         BottomItem(title = "Profile",
@@ -76,7 +76,7 @@ fun BottomNavigationBar(
                             }
                             2 -> {
                                 bottomNavController.popBackStack()
-                                bottomNavController.navigate(Screens.ReservationsScreen.route)
+                                bottomNavController.navigate(Screens.ParkingDetailsScreen.route)
                             }
                             3 -> {
                                 bottomNavController.popBackStack()
