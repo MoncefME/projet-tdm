@@ -46,11 +46,31 @@ fun ParkingMapScreen(
 ) {
     val parkings by viewModel.parkings
 
+
     val atasehir = LatLng(40.9971, 29.1007)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(atasehir, 15f)
     }
 
+    // Mutable state to hold the user's location
+    val userLocation by remember { mutableStateOf<LatLng?>(null) }
+
+    // Retrieve user's last known location
+//    remember {
+//        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+//            userLocation.value = if (location != null) {
+//                LatLng(location.latitude, location.longitude)
+//            } else {
+//                // Default location if user's location is not available
+//                LatLng(40.9971, 29.1007)
+//            }
+//        }
+//    }
+
+//    val cameraPositionState = rememberCameraPositionState {
+//        // Set camera position to user's location or default location
+//        position = CameraPosition.fromLatLngZoom(userLocation.value ?: LatLng(40.9971, 29.1007), 15f)
+//    }
 
     val uiSettings = remember {
         mutableStateOf(MapUiSettings(zoomControlsEnabled = true))
