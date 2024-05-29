@@ -30,7 +30,7 @@ fun LocationAwareParkingMapScreen(
     viewModel: ParkingViewModel = viewModel()
 ) {
     val context = LocalContext.current
-    var userLocation by remember { mutableStateOf(LatLng(0.0, 0.0)) }  // Default to Algiers, Algeria
+    var userLocation by remember { mutableStateOf(LatLng(36.741098, 7.108108)) }  // Default to Algiers, Algeria
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(userLocation, 15f)
     }
