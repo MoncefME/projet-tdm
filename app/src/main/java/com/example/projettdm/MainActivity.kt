@@ -1,7 +1,10 @@
 package com.example.projettdm
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.getValue
@@ -15,6 +18,8 @@ import com.example.projettdm.onboarding.presentation.SplashViewModel
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.ui.theme.ProjetTDMTheme
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,5 +43,19 @@ class MainActivity : ComponentActivity() {
                NavigationGraph(startDestination = screen)
             }
         }
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Log.d("serine", token)
+
+            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+        })
     }
 }

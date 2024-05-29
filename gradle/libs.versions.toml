@@ -1,11 +1,13 @@
 [versions]
 accompanistPager = "0.24.2-alpha"
+accompanistPermissions = "0.30.1"
 accompanistSystemuicontroller = "0.27.0"
 agp = "8.3.2"
 coilCompose = "2.4.0"
 compiler = "1.1.1"
 coreSplashscreen = "1.0.1"
 datastorePreferences = "1.1.0"
+firebaseBom = "33.0.0"
 googleServices = "4.4.1"
 jwtdecode = "2.0.2"
 kotlin = "1.9.22"
@@ -37,6 +39,7 @@ roomRuntime = "2.6.1"
 roomCompiler = "2.6.1"
 ksp = "1.9.21-1.0.15"
 playServicesLocation = "21.2.0"
+firebaseMessagingKtx = "24.0.0"
 
 
 
@@ -44,6 +47,7 @@ playServicesLocation = "21.2.0"
 [libraries]
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanistPager" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
@@ -55,7 +59,9 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 compiler = { module = "android.arch.persistence.room:compiler", version.ref = "compiler" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
-#google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterGson" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -90,6 +96,9 @@ androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "
  zxing = { module = "com.google.zxing:core", version = "3.5.1" }
 zxing2= { module = "com.journeyapps:zxing-android-embedded", version = "4.3.0" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging"}
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
+
 
 
 
@@ -100,6 +109,6 @@ kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
 
-#google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 
 
