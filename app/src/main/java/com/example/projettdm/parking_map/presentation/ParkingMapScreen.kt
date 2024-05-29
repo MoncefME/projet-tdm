@@ -29,48 +29,27 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
-@SuppressLint("MissingPermission")
-
 @Composable
+
 fun ParkingMapScreen(
     navController: NavController,
-    viewModel: ParkingViewModel
+    viewModel: ParkingViewModel,
+    userLocation: LatLng,
+    cameraPositionState: CameraPositionState
+
 ) {
     val parkings by viewModel.parkings
 
-
-    val atasehir = LatLng(40.9971, 29.1007)
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(atasehir, 15f)
-    }
-
-    // Mutable state to hold the user's location
-    val userLocation by remember { mutableStateOf<LatLng?>(null) }
-
-    // Retrieve user's last known location
-//    remember {
-//        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-//            userLocation.value = if (location != null) {
-//                LatLng(location.latitude, location.longitude)
-//            } else {
-//                // Default location if user's location is not available
-//                LatLng(40.9971, 29.1007)
-//            }
-//        }
-//    }
-
-//    val cameraPositionState = rememberCameraPositionState {
-//        // Set camera position to user's location or default location
-//        position = CameraPosition.fromLatLngZoom(userLocation.value ?: LatLng(40.9971, 29.1007), 15f)
-//    }
 
     val uiSettings = remember {
         mutableStateOf(MapUiSettings(zoomControlsEnabled = true))
@@ -79,15 +58,21 @@ fun ParkingMapScreen(
         mutableStateOf(MapProperties(mapType = MapType.TERRAIN))
     }
 
+    Text(text = "Hello World")
+    Text(text = "Hello World 2, i hope you get displayed")
 
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState,
         properties = properties.value,
         uiSettings = uiSettings.value,
+    ) {
+        Marker(
+            state = MarkerState(position = userLocation),
+            title = "Your Location",
+            icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+        )
 
-
-        ) {
         parkings.forEach { parking ->
             val position = LatLng(parking.latitude, parking.longitude)
             MarkerInfoWindow(
@@ -98,16 +83,17 @@ fun ParkingMapScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
                     modifier = Modifier
-                        .border(
-                            BorderStroke(1.dp, Color.Black),
-                            RoundedCornerShape(10)
-                        )
+                        .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(10))
                         .clip(RoundedCornerShape(10))
                         .background(Color.Blue)
                         .padding(20.dp)
                 ) {
                     Text(parking.name, fontWeight = FontWeight.Bold, color = Color.White)
                     Text(parking.description, fontWeight = FontWeight.Medium, color = Color.White)
+                    Text(text = "Longitude")
+                    Text(text = userLocation.longitude.toString())
+                    Text(text = "Latitude")
+                    Text(text = userLocation.latitude.toString())
                 }
             }
         }
