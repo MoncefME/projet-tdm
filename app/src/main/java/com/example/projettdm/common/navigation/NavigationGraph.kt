@@ -22,6 +22,8 @@ import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.parking_map.presentation.ParkingMapScreen
+import com.example.projettdm.parking_map.presentation.LocationAwareParkingMapScreen
+
 import com.example.projettdm.reservation.presentation.MyReservationsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
@@ -107,7 +109,9 @@ fun NavigationGraph(
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    ParkingMapScreen(navController, parkingViewModel)
+                   // ParkingMapScreen(navController, parkingViewModel)
+                    LocationAwareParkingMapScreen(navController, parkingViewModel)
+
                 }
             }
         }
