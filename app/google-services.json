@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "688126778028",
+    "project_id": "tdm-project-b4d04",
+    "storage_bucket": "tdm-project-b4d04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688126778028:android:cf473ef8b906b8f3021d09",
+        "android_client_info": {
+          "package_name": "com.example.projettdm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcH1OT0YAtol8Lee8OR8cMF7vY-GkKX6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

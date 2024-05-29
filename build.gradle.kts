@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-//        classpath(libs.google.services)
+       classpath(libs.google.services)
     }
 }
 plugins {
@@ -11,5 +11,5 @@ plugins {
     alias(libs.plugins.ksp) apply false
 
 
-//    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.google.services) apply false
 }
