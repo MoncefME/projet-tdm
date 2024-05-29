@@ -77,7 +77,7 @@ fun ParkingMapScreen(
             val position = LatLng(parking.latitude, parking.longitude)
             MarkerInfoWindow(
                 state = MarkerState(position = position),
-                icon = BitmapDescriptorFactory.fromResource(R.drawable.logo_2)
+                icon = BitmapDescriptorFactory.fromResource(R.drawable.logo_map)
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
