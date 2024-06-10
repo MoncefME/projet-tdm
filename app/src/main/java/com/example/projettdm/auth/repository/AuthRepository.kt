@@ -51,7 +51,6 @@ class AuthRepository @Inject constructor(
             val token = preferences.getAuthToken() ?: ""
             val user = authAPI.getUserInfo("Bearer $token")
 
-
             preferences.saveUserInfos(user)
             user
         }
