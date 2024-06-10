@@ -42,7 +42,9 @@ fun ProfileScreen(
             UserInfoRow(Icons.Default.Person, "First Name", user!!.firstName)
             UserInfoRow(Icons.Default.Person, "Last Name", user!!.lastName)
             UserInfoRow(Icons.Default.Email, "Email", user!!.email)
-            UserInfoRow(Icons.Default.Phone, "Phone Number", user!!.phone)
+            if (!user?.phone.isNullOrEmpty()) {
+                UserInfoRow(Icons.Default.Phone, "Phone Number", user!!.phone)
+            }
 
             Button(
                 onClick = {

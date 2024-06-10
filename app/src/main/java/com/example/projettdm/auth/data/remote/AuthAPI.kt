@@ -1,5 +1,6 @@
 package com.example.projettdm.auth.data.remote
 
+import com.example.projettdm.auth.data.remote.request.GoogleLoginBody
 import com.example.projettdm.auth.data.remote.request.LoginBody
 import com.example.projettdm.auth.data.remote.request.SignupBody
 import com.example.projettdm.auth.data.remote.response.LoginResponse
@@ -24,6 +25,11 @@ interface AuthAPI {
     suspend fun getUserInfo(
         @Header("Authorization") token:String,
     ): UserInfoResponse
+
+    @POST("/users/google-auth")
+    suspend fun googleAuth(
+        @Body googleLoginBody: GoogleLoginBody
+    ) : LoginResponse
 
 
     companion object {

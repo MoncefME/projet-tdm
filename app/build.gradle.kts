@@ -146,6 +146,7 @@ dependencies {
     implementation(libs.zxing)
     implementation(libs.zxing2)
 
+<<<<<<< main
     //push notifications
     implementation(libs.firebase.bom)
 
@@ -155,4 +156,9 @@ dependencies {
     implementation(libs.converter.moshi)
     implementation(libs.accompanist.permissions)
 
+=======
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+>>>>>>> notifications-backup
 }
