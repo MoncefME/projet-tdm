@@ -43,19 +43,6 @@ class MainActivity : ComponentActivity() {
                NavigationGraph(startDestination = screen)
             }
         }
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
 
-            // Get new FCM registration token
-            val token = task.result
-
-            // Log and toast
-            Log.d("serine", token)
-
-            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
-        })
     }
 }

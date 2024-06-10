@@ -19,9 +19,9 @@ class AuthRepository @Inject constructor(
     private val authAPI: AuthAPI,
     private val preferences: AuthPreferences
 ) {
-    suspend fun login(email: String, password: String) : Resource<Unit> {
+    suspend fun login(email: String, password: String, fcmToken: String) : Resource<Unit> {
         return try {
-            val response = authAPI.login(LoginBody(email, password))
+            val response = authAPI.login(LoginBody(email, password, fcmToken))
             if(response.message === "Auth failed"){
                 return Resource.Error("Auth failed")
             }else {

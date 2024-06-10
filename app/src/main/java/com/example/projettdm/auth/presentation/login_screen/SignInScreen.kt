@@ -1,5 +1,6 @@
 package com.example.projettdm.auth.presentation.login_screen
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.projettdm.R
 import com.example.projettdm.common.navigation.Screens
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 @Composable
@@ -34,7 +36,21 @@ fun SignInScreen(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val state = viewModel.signInState.collectAsState(initial = null)
+    var fcmToken by remember { mutableStateOf("") }
 
+
+    // Fetch the FCM token
+    LaunchedEffect(Unit) {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("fetching", "Fetching FCM registration token failed", task.exception)
+                return@addOnCompleteListener
+            }
+            // Get new FCM registration token
+            fcmToken = task.result
+            Log.d("FCMToken", "FCM Token: $fcmToken")
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +95,7 @@ fun SignInScreen(
         Button(
             onClick = {
                 scope.launch {
-                    viewModel.loginUser(email, password)
+                    viewModel.loginUser(email, password, fcmToken)
                     if (state.value?.isSuccess == true) {
                         navController.navigate(Screens.ProfileScreen.route)
                     }

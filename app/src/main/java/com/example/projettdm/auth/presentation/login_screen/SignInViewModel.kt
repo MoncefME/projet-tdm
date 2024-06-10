@@ -32,8 +32,8 @@ class SignInViewModel @Inject constructor(
 //    }
 
 
-    fun loginUser(email: String, password: String) = viewModelScope.launch {
-            repository.login(email, password).let { response ->
+    fun loginUser(email: String, password: String, fcmToken: String) = viewModelScope.launch {
+            repository.login(email, password, fcmToken).let { response ->
                 when(response){
                     is Resource.Success -> {
                         _signInState.send(SignInState(isSuccess = true))

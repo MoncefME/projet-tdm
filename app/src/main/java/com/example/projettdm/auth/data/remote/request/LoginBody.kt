@@ -6,5 +6,7 @@ data class LoginBody (
     val email: String,
     @SerializedName("password")
     val password: String,
+    @SerializedName("fcmToken")
+    val fcmToken: String
 
 )
