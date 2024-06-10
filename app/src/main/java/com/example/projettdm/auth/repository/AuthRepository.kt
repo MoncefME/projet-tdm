@@ -5,9 +5,11 @@ import com.auth0.android.jwt.JWT
 
 import com.example.projettdm.auth.data.local.AuthPreferences
 import com.example.projettdm.auth.data.remote.AuthAPI
+import com.example.projettdm.auth.data.remote.request.GoogleLoginBody
 import com.example.projettdm.auth.data.remote.request.LoginBody
 import com.example.projettdm.auth.data.remote.request.SignupBody
 import com.example.projettdm.auth.data.remote.response.UserInfoResponse
+import com.example.projettdm.auth.presentation.login_screen.UserInfo
 import com.example.projettdm.common.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,9 +50,37 @@ class AuthRepository @Inject constructor(
         return withContext(Dispatchers.IO) {
             val token = preferences.getAuthToken() ?: ""
             val user = authAPI.getUserInfo("Bearer $token")
+
+
             preferences.saveUserInfos(user)
             user
         }
+    }
+
+
+    suspend fun googleAuth(userInfo : UserInfo) : Resource<Unit> {
+
+        return try {
+            if (userInfo.email == null || userInfo.firstName == null || userInfo.lastName == null) {
+                throw IllegalArgumentException("User info fields cannot be null")
+            }
+
+            val response = authAPI.googleAuth(
+                GoogleLoginBody(
+                    userInfo.email,
+                    userInfo.firstName,
+                    userInfo.lastName
+                ))
+            if(response.message === "Auth failed"){
+                return Resource.Error("Auth failed")
+            }else {
+                response.token?.let { preferences.saveAuthToken(it) }
+                Resource.Success(Unit)
+            }
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "An error occurred")
+        }
+
     }
 
 
