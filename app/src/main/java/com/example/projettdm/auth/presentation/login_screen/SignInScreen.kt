@@ -1,6 +1,9 @@
 package com.example.projettdm.auth.presentation.login_screen
 
+import android.os.Build
+import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,19 +18,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.credentials.CredentialManager
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.GetCredentialException
 import androidx.navigation.NavController
 import com.example.projettdm.R
 import com.example.projettdm.common.navigation.Screens
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
 fun SignInScreen(
     navController: NavController,
     viewModel: SignInViewModel
 ) {
 
-//    val googleSignInState = viewModel.googleState.value
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
@@ -121,13 +129,32 @@ fun SignInScreen(
                 .padding(top = 10.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            IconButton(onClick = {
-                // TODO Later: Implement Google Sign In
-//                scope.launch {
-//                    viewModel.googleSignIn("google")
-//                }
-                navController.navigate(Screens.ProfileScreen.route)
-            }) {
+
+            IconButton(
+                onClick = {
+                    val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
+                        .setFilterByAuthorizedAccounts(false)
+                        .setServerClientId("110532752994-vn1mpiftqgs2tbupn4em6dk6gc3oc7vr.apps.googleusercontent.com")
+                        .build()
+
+                    val request =
+                        GetCredentialRequest.Builder().addCredentialOption(googleIdOption)
+                            .build()
+
+                    val credentialManager = CredentialManager.create(context)
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            val result =
+                                credentialManager.getCredential(context, request)
+                            viewModel.handleSignIn(result)
+
+                        } catch (e: GetCredentialException) {
+                            Log.e("MainActivity", "GetCredentialException", e)
+                        }
+                    }
+                },
+                ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_google),
                     contentDescription = "Google Icon",
@@ -136,7 +163,6 @@ fun SignInScreen(
                 )
             }
 
-            // LaunchedEffect block to observe changes in the error state
             LaunchedEffect(key1 = state.value?.isError) {
                 scope.launch {
                     if (state.value?.isError?.isNotEmpty() == true) {
@@ -146,17 +172,6 @@ fun SignInScreen(
                 }
             }
 
-            // LaunchedEffect block to observe changes in the Google sign-in success state
-//            LaunchedEffect(key1 = googleSignInState.success) {
-//                scope.launch {
-//                    if (googleSignInState.success != null) {
-//                        Toast.makeText(context, "Sign In Success", Toast.LENGTH_LONG).show()
-//                        navController.navigate(Screens.ProfileScreen.route)
-//                    }
-//                }
-//            }
-
-            // LaunchedEffect block to observe changes in the sign-in success state
             LaunchedEffect(key1 = state.value?.isSuccess) {
                 scope.launch {
                     if(state.value?.isSuccess == true){
@@ -166,12 +181,6 @@ fun SignInScreen(
                     }
                 }
             }
-
         }
-//        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-//            if (googleSignInState.loading){
-//                CircularProgressIndicator()
-//            }
-//        }
     }
 }
