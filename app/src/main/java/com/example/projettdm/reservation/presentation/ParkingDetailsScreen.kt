@@ -204,6 +204,7 @@ fun ParkingDetailsScreen(
                 .fillMaxWidth(),
         ) {
             Text(text = "Book")
+
             Icon(
                 imageVector = Icons.Default.CheckCircle,
                 contentDescription = "Book",
