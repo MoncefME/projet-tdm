@@ -15,10 +15,14 @@ data class Reservation(
     var userId: String="",
     val entryTime: Date,
     val exiteTime: Date,
-    var place: Int?=null
+    var place: Int?=null,
+
+    var parkingName : String?=null,
+    var parkingPrice : String?=null,
+    var parkingCity : String?=null,
 
 
-)
+    )
 
 
 

@@ -19,10 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.projettdm.auth.presentation.login_screen.SignInViewModel
 import com.example.projettdm.common.navigation.NavigationGraph
-import com.example.projettdm.common.navigation.Screens
 import com.example.projettdm.onboarding.presentation.SplashViewModel
-import com.example.projettdm.parking_list.presentation.ParkingListScreen
-import com.example.projettdm.parking_list.presentation.ParkingViewModel
 import com.example.projettdm.ui.theme.ProjetTDMTheme
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging

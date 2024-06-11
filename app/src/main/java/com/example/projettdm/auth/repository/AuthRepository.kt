@@ -82,5 +82,9 @@ class AuthRepository @Inject constructor(
 
     }
 
+    suspend fun isUserAuthenticated(): Boolean {
+        return preferences.getAuthToken() != null
+    }
+
 
 }

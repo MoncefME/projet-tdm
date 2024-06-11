@@ -72,7 +72,7 @@ fun QrCodeDisplay(content: String) {
     Image(
         painter = painter,
         contentDescription = "QR Code",
-        modifier = Modifier.size(150.dp)
+        modifier = Modifier.size(200.dp)
     )
 }
 

@@ -22,6 +22,7 @@ import com.example.projettdm.auth.presentation.signup_screen.SignUpScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpViewModel
 import com.example.projettdm.common.utils.OfflineScreen
 import com.example.projettdm.common.utils.isInternetAvailable
+import com.example.projettdm.onboarding.presentation.EmptyScreen
 import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
@@ -193,6 +194,14 @@ fun NavigationGraph(
                 ) {
                     MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel, navController = navController)
                 }
+            }
+        }
+
+        composable(route = Screens.EmptyScreen.route) {
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                 EmptyScreen()
             }
         }
     }
