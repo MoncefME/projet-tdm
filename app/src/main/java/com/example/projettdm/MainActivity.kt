@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProjetTDMTheme {
                 val screen by splashViewModel.startDestination
-//                NavigationGraph(startDestination = Screens.ProfileScreen.route)
-                NavigationGraph(startDestination = screen)
+                NavigationGraph(startDestination = Screens.ProfileScreen.route)
+//                NavigationGraph(startDestination = screen)
             }
         }
     }

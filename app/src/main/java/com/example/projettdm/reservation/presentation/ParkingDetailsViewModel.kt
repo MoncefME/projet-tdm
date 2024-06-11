@@ -61,8 +61,9 @@ class ParkingDetailsViewModel @Inject constructor(
                         reservation.id = data.id
                         reservation.place = data.place
                         reservation.userId = data.userId
-                        reservation.parkingName = data.parkingName
-                        reservation.parkingPrice = data.parkingPrice
+                        reservation.parkingName = parking.value?.name.toString()
+                        reservation.parkingPrice = parking.value?.price.toString()
+                        reservation.parkingCity = parking.value?.city.toString()
 
                     }
 

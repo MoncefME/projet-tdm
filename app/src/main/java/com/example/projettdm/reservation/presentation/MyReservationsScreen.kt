@@ -127,7 +127,7 @@ fun ReservationCard(reservation: Reservation, navController: NavController) {
         ) {
             // Parking Name
             Text(
-                text = "Parking Name: ${reservation.parkingId}",
+                text = "Parking : ${reservation.parkingName ?: "Unknown"}",
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
@@ -143,7 +143,12 @@ fun ReservationCard(reservation: Reservation, navController: NavController) {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Place: ${reservation.place}",
+                    text = "Place: ",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = reservation.parkingCity ?: "Unknown",
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

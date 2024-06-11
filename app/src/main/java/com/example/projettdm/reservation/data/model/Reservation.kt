@@ -19,6 +19,7 @@ data class Reservation(
 
     var parkingName : String?=null,
     var parkingPrice : String?=null,
+    var parkingCity : String?=null,
 
 
     )
