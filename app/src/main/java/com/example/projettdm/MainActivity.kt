@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                  val screen by splashViewModel.startDestination
 //                //val screen by signinViewModel.
                 navController = rememberNavController()
-                NavigationGraph(startDestination = screen, navController = navController)
+                NavigationGraph(startDestination = screen, navController = navController, context = this)
 
                 LaunchedEffect(Unit) {
                     handleIntent(intent)
