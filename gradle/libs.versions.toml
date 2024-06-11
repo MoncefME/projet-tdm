@@ -29,6 +29,8 @@ hiltCompiler = "2.50"
 hiltCompilerVersion = "1.2.0"
 loggingInterceptor = "4.10.0"
 mapsCompose = "4.3.3"
+material = "1.10.0"
+materialVersion = "1.6.7"
 navigationCompose = "2.7.7"
 okhttpVersion = "4.11.0"
 playServicesAuth = "21.1.1"
@@ -42,6 +44,7 @@ roomCompiler = "2.6.1"
 ksp = "1.9.21-1.0.15"
 playServicesLocation = "21.2.0"
 firebaseMessagingKtx = "24.0.0"
+ui = "1.6.7"
 
 
 
@@ -59,6 +62,7 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompilerVersion" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompilerVersion" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 compiler = { module = "android.arch.persistence.room:compiler", version.ref = "compiler" }
@@ -88,6 +92,7 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttpVersion" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
@@ -99,7 +104,9 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomRuntime" }
- zxing = { module = "com.google.zxing:core", version = "3.5.1" }
+
+ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+zxing = { module = "com.google.zxing:core", version = "3.5.1" }
 zxing2= { module = "com.journeyapps:zxing-android-embedded", version = "4.3.0" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging"}

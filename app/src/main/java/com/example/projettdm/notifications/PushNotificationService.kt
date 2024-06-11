@@ -1,45 +1,15 @@
 package com.example.projettdm.notifications
-//import android.util.Log
-//import androidx.compose.material.ExperimentalMaterialApi
-//import com.google.firebase.messaging.FirebaseMessagingService;
-//import com.google.firebase.messaging.RemoteMessage
-//
-//class PushNotificationService: FirebaseMessagingService()  {
-//
-//    /**
-//     * Called if the FCM registration token is updated. This may occur if the security of
-//     * the previous token had been compromised. Note that this is called when the
-//     * FCM registration token is initially generated so this is where you would retrieve the token.
-//     */
-//    override fun onNewToken(token: String) {
-//       // super.onNewToken(token)
-//
-//        //UPDATE SERVER
-//        Log.d("token", "Refreshed token: $token")
-//
-//        // If you want to send messages to this application instance or
-//        // manage this apps subscriptions on the server side, send the
-//        // FCM registration token to your app server.
-//    }
-//
-//    override fun onMessageReceived(remoteMessage: RemoteMessage) {
-//        super.onMessageReceived(remoteMessage)
-//
-//        //HANDLE NOTIFICATION - respond to received message
-//        remoteMessage.notification?.let { message ->
-//           // sendNotification(message)
-//        }
-//    }
-
-//}
-
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.example.projettdm.MainActivity
+import com.example.projettdm.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -48,7 +18,6 @@ class FirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
 
-        // Check if message contains a data payload
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
 
@@ -62,7 +31,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         // Check if message contains a notification payload
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
-            showNotification(it.title ?: "Default Title", it.body ?: "Default Body")
+            showNotification(it.title ?: "Parking Notif", it.body ?: "Your reservation is soon dude")
         }
     }
 
@@ -76,16 +45,27 @@ class FirebaseMessagingService : FirebaseMessagingService() {
             val channel = NotificationChannel(
                 channelId,
                 "Default Channel",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             notificationManager.createNotificationChannel(channel)
         }
 
+
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("navigateTo", "ReservationsScreen")
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setContentTitle(title)
             .setContentText(body)
-//            .setSmallIcon(R.drawable.ic_notification) // Replace with your icon
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setSmallIcon(R.drawable.logo_2)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
 
         notificationManager.notify(notificationId, notificationBuilder.build())
     }
