@@ -1,9 +1,11 @@
 package com.example.projettdm
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,7 +24,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     @Inject
     lateinit var splashViewModel: SplashViewModel
-    lateinit var signinViewModel: SignInViewModel
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().setKeepOnScreenCondition {
@@ -31,11 +33,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ProjetTDMTheme {
-             //   val parkingViewModel = hiltViewModel<ParkingViewModel>()
-              //  ParkingListScreen(navController = rememberNavController(), parkingViewModel)
-                 val screen by splashViewModel.startDestination
-//                //val screen by signinViewModel.
-               NavigationGraph(startDestination = screen)
+                val screen by splashViewModel.startDestination
+//                NavigationGraph(startDestination = Screens.ProfileScreen.route)
+                NavigationGraph(startDestination = screen)
             }
         }
     }

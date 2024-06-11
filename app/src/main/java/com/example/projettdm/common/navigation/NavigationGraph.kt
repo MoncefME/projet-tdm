@@ -1,6 +1,8 @@
 package com.example.projettdm.common.navigation
 
+import android.os.Build
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +20,7 @@ import com.example.projettdm.auth.presentation.login_screen.SignInViewModel
 import com.example.projettdm.auth.presentation.profile_screen.ProfileScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpViewModel
+import com.example.projettdm.onboarding.presentation.EmptyScreen
 import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
@@ -29,6 +32,7 @@ import com.example.projettdm.reservation.presentation.ParkingDetailsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @OptIn(ExperimentalAnimationApi::class, ExperimentalPagerApi::class)
 @Composable
 fun NavigationGraph(
@@ -154,6 +158,14 @@ fun NavigationGraph(
                 ) {
                     MyReservationsScreen(parkingDetailsViewModel = parkingDetailsViewModel, navController = navController)
                 }
+            }
+        }
+
+        composable(route = Screens.EmptyScreen.route) {
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                 EmptyScreen()
             }
         }
     }

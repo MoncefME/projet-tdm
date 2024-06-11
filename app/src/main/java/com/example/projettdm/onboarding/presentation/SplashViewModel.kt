@@ -17,7 +17,7 @@ class SplashViewModel @Inject constructor(
     private val _isLoading: MutableState<Boolean> = mutableStateOf(true)
     val isLoading: State<Boolean> = _isLoading
 
-    private val _startDestination: MutableState<String> = mutableStateOf(Screens.OnBoardingScreen.route)
+    private val _startDestination: MutableState<String> = mutableStateOf(Screens.EmptyScreen.route)
     val startDestination: State<String> = _startDestination
 
     init {

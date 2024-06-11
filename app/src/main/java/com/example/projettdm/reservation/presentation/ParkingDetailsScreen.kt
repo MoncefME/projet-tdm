@@ -117,7 +117,9 @@ fun ParkingDetailsScreen(
                 val reservation = Reservation(
                     parkingId = parkingId,
                     entryTime = currentDate,
-                    exiteTime = currentDate
+                    exiteTime = currentDate,
+                    parkingName = viewModel.parking.value?.name ?: "",
+                    parkingPrice = viewModel.parking.value?.price.toString(),
                 )
                 // viewModel.addReservation(reservation)
                 viewModel.addReservation(reservation) { id ->
@@ -149,6 +151,7 @@ fun ParkingDetailsScreen(
 @Composable
 fun QrCodePopup(content: String, onDismiss: () -> Unit) {
     AlertDialog(
+
         onDismissRequest = onDismiss,
         title = { Text(text = "Reservation QR Code") },
         text = {
