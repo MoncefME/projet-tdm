@@ -22,7 +22,6 @@ data class BottomItem(
     val title: String, val icon: ImageVector
 )
 
-
 @Composable
 fun BottomNavigationBar(
     bottomNavController: NavHostController,

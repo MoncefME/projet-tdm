@@ -16,12 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class ParkingViewModel @Inject constructor(
     private val repository: ParkingRepository,
-
-) :
-    ViewModel() {
+) : ViewModel() {
 
     val parkings = mutableStateOf((listOf<Parking>()))
-    //val error = mutableStateOf(false)
     val error = MutableStateFlow(false)
 
     init{
@@ -36,12 +33,10 @@ class ParkingViewModel @Inject constructor(
                 } else {
                     println("error")
                     error.value = true
-
                 }
             }
         }
     }
-
 }
 
 

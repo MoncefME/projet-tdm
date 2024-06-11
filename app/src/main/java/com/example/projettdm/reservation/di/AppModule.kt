@@ -1,11 +1,9 @@
 package com.example.projettdm.reservation.di
 
 
-
-import android.app.Application
 import android.content.Context
 import androidx.room.Room.databaseBuilder
-import com.example.projettdm.reservation.data.local.ReservationDao
+import com.example.projettdm.auth.data.local.AuthPreferences
 import com.example.projettdm.reservation.data.local.ReservationDataBase
 import com.example.projettdm.reservation.data.remote.ReservationAPI
 import com.example.projettdm.reservation.data.repository.ReservationRepository
@@ -30,10 +28,6 @@ object  ReservationModule{
             .create(ReservationAPI::class.java)
     }
 
-//    @Provides
-//    fun provideReservationDao(db: ReservationDataBase): ReservationDao {
-//        return db.reservationDao
-//    }
 
     @Provides
     @Singleton
@@ -51,9 +45,10 @@ object  ReservationModule{
     @Singleton
     fun provideReservationRepository(
         reservationAPI: ReservationAPI,
-        reservationDataBase: ReservationDataBase
+        reservationDataBase: ReservationDataBase,
+        prefrerences : AuthPreferences
     ): ReservationRepository {
-        return ReservationRepository(reservationAPI, reservationDataBase)
+        return ReservationRepository(reservationAPI, reservationDataBase,prefrerences)
     }
 
 }

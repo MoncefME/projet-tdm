@@ -13,6 +13,4 @@ data class Parking(
     val longitude: Double,
     val description: String,
     val availablePlaces: Int,
-//    val setup: String,
-//    val punchline: String,
 )

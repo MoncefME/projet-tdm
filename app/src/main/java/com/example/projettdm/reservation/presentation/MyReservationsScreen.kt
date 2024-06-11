@@ -169,7 +169,7 @@ fun ReservationCard(reservation: Reservation, navController: NavController) {
                     ),
                     shape = RoundedCornerShape(50)
                 ) {
-                    Text(text = "Parking Details")
+                    Text(text = "Parking Details",style=MaterialTheme.typography.bodySmall)
                 }
                 Button(
                     onClick = {
@@ -181,7 +181,7 @@ fun ReservationCard(reservation: Reservation, navController: NavController) {
                     ),
                     shape = RoundedCornerShape(50)
                 ) {
-                    Text(text = "Show QR Code")
+                    Text(text = "Show QR Code",style=MaterialTheme.typography.bodySmall)
                 }
             }
         }

@@ -8,5 +8,4 @@ data class LoginBody (
     val password: String,
     @SerializedName("fcmToken")
     val fcmToken: String
-
 )

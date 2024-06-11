@@ -28,9 +28,6 @@ interface ReservationAPI {
 
 
     companion object {
-
         const val BASE_URL = "https://backend-bdm.onrender.com"
-          //const val BASE_URL = "https://ac88-129-45-114-200.ngrok-free.app "
-
     }
 }

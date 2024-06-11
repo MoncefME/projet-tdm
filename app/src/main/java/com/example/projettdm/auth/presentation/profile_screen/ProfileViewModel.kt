@@ -23,7 +23,7 @@ class ProfileViewModel @Inject constructor(
             fetchUser()
         }
     }
-//
+
     private suspend fun fetchUser() {
         val user = authRepository.getUserInfo()
         _user.value = user

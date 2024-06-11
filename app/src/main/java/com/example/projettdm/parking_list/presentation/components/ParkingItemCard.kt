@@ -141,7 +141,7 @@ fun ParkingItemCard(parking: Parking, navController: NavController) {
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = "${parking.available} / ${parking.capacity}",
+                    text = "${parking.availablePlaces} / ${parking.capacity}",
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurface
                 )

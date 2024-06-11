@@ -8,11 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -24,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
-
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -119,11 +115,9 @@ fun ProfileScreen(
                 }
             }
 
-            // Buttons Column
             Column(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                // Logout Button
                 Button(
                     onClick = {
                         viewModel.logout()
@@ -146,70 +140,7 @@ fun ProfileScreen(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(text = "Logout")
                 }
-
-
-                // Reservation Page Button
-//                Button(
-//                    onClick = {
-//                        navController.navigate(Screens.ReservationsScreen.route)
-//                    },
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(top = 16.dp)
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.ShoppingCart,
-//                        contentDescription = "Reservations Icon",
-//                        tint = Color.White,
-//                        modifier = Modifier.size(24.dp)
-//                    )
-//                    Spacer(modifier = Modifier.width(8.dp))
-//                    Text(text = "Reservations")
-//                }
-
-
-                // Parking List Button
-//                Button(
-//                    onClick = {
-//                        navController.navigate(Screens.ParkingListScreen.route)
-//                    },
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(top = 16.dp)
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.List,
-//                        contentDescription = "Parking List Icon",
-//                        tint = Color.White,
-//                        modifier = Modifier.size(24.dp)
-//                    )
-//                    Spacer(modifier = Modifier.width(8.dp))
-//                    Text(text = "Parking List")
-//                }
-
-
-                // Map Button
-//                Button(
-//                    onClick = {
-//                        navController.navigate(Screens.ParkingMapScreen.route)
-//                    },
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(top = 16.dp)
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.Place,
-//                        contentDescription = "Map Icon",
-//                        tint = Color.White,
-//                        modifier = Modifier.size(24.dp)
-//                    )
-//                    Spacer(modifier = Modifier.width(8.dp))
-//                    Text(text = "Map")
-//                }
             }
-
-
-
         } else {
             Button(
                 onClick = {

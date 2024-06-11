@@ -25,7 +25,6 @@ import androidx.credentials.exceptions.GetCredentialException
 import androidx.navigation.NavController
 import com.example.projettdm.R
 import com.example.projettdm.common.navigation.Screens
-
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import kotlinx.coroutines.CoroutineScope
@@ -55,7 +54,6 @@ fun SignInScreen(
                 Log.w("fetching", "Fetching FCM registration token failed", task.exception)
                 return@addOnCompleteListener
             }
-            // Get new FCM registration token
             fcmToken = task.result
             Log.d("FCMToken", "FCM Token: $fcmToken")
         }

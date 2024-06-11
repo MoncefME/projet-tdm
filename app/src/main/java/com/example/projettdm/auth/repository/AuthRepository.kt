@@ -1,8 +1,5 @@
 package com.example.projettdm.auth.repository
 
-import android.util.Log
-import com.auth0.android.jwt.JWT
-
 import com.example.projettdm.auth.data.local.AuthPreferences
 import com.example.projettdm.auth.data.remote.AuthAPI
 import com.example.projettdm.auth.data.remote.request.GoogleLoginBody
@@ -11,9 +8,7 @@ import com.example.projettdm.auth.data.remote.request.SignupBody
 import com.example.projettdm.auth.data.remote.response.UserInfoResponse
 import com.example.projettdm.auth.presentation.login_screen.UserInfo
 import com.example.projettdm.common.utils.Resource
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

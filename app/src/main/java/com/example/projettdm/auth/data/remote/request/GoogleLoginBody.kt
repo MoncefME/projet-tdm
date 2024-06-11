@@ -8,5 +8,4 @@ data class GoogleLoginBody (
     val firstName: String,
     @SerializedName("lastName")
     val lastName : String,
-
     )

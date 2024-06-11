@@ -216,14 +216,14 @@ fun ParkingMapScreen(
                     ) {
                         Text(text = "Parking details")
                     }
-                    Button(
-                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                        onClick = {
-                            navController.navigate(Screens.ParkingDetailsScreen.route + "/${parking.id}")
-                        },
-                    ) {
-                        Text(text = "Details du parking")
-                    }
+//                    Button(
+//                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+//                        onClick = {
+//                            navController.navigate(Screens.ParkingDetailsScreen.route + "/${parking.id}")
+//                        },
+//                    ) {
+//                        Text(text = "Details du parking")
+//                    }
                 }
             }
         }

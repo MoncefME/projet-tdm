@@ -73,7 +73,6 @@ class SignInViewModel @Inject constructor(
 
                         }
 
-                        // TODO: Send [googleIdTokenCredential.idToken] to your
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e("MainActivity", "handleSignIn:", e)
                     }

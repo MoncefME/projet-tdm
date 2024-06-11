@@ -16,11 +16,9 @@ data class Reservation(
     val entryTime: Date,
     val exiteTime: Date,
     var place: Int?=null,
-
     var parkingName : String?=null,
     var parkingPrice : String?=null,
     var parkingCity : String?=null,
-
 
     )
 

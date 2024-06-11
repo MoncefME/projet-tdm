@@ -11,8 +11,6 @@ import retrofit2.http.Path
 
 interface ParkingAPI {
    @GET("/parkings")
-   //@GET("/jokes/ten")
-
    suspend fun getParkingList(): Response<List<Parking>>
 
     @GET("/parkings/{id}")
@@ -20,7 +18,5 @@ interface ParkingAPI {
 
     companion object {
         const val BASE_URL = "https://backend-bdm.onrender.com"
-
-       // const val BASE_URL = "https://ff1f-41-220-149-190.ngrok-free.app"
     }
 }

@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.projettdm.auth.presentation.login_screen.SignInViewModel
 import com.example.projettdm.common.navigation.NavigationGraph
+import com.example.projettdm.common.navigation.Screens
 import com.example.projettdm.onboarding.presentation.SplashViewModel
 import com.example.projettdm.ui.theme.ProjetTDMTheme
 import com.google.android.gms.tasks.OnCompleteListener
@@ -30,7 +31,6 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     @Inject
     lateinit var splashViewModel: SplashViewModel
-    lateinit var signinViewModel: SignInViewModel
     private lateinit var navController: NavHostController
 
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
@@ -42,10 +42,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ProjetTDMTheme {
-             //   val parkingViewModel = hiltViewModel<ParkingViewModel>()
-              //  ParkingListScreen(navController = rememberNavController(), parkingViewModel)
+
                  val screen by splashViewModel.startDestination
-//                //val screen by signinViewModel.
                 navController = rememberNavController()
                 NavigationGraph(startDestination = screen, navController = navController, context = this)
 

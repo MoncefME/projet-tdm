@@ -10,7 +10,9 @@ import java.util.Date
 interface ReservationDao {
     @Insert
     fun addLocalReservation(res: Reservation)
-    @Query("SELECT * FROM Reservations")
-    fun getAllReservations():List<Reservation>
+    @Query("SELECT * FROM Reservations WHERE userId = :userId")
+    fun getAllReservations(
+        userId: String
+    ):List<Reservation>
 
 }

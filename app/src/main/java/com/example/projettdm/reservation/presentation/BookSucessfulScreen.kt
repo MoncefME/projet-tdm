@@ -38,9 +38,6 @@ fun rememberQrBitmapPainter(
     val sizePx = with(density) { size.roundToPx() }
     val paddingPx = with(density) { padding.roundToPx() }
 
-//    val bitmap by remember(content) {
-//        mutableStateOf<Bitmap?>(null)
-//    }
     val bitmap = remember(content) {
         generateQrCodeBitmap(content, sizePx - paddingPx * 2)
     }

@@ -6,7 +6,6 @@ import androidx.credentials.Credential
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.auth0.android.jwt.JWT
-import com.example.projettdm.auth.presentation.login_screen.SignInState
 import com.example.projettdm.auth.presentation.login_screen.UserInfo
 import com.example.projettdm.auth.repository.AuthRepository
 import com.example.projettdm.common.utils.Resource
@@ -17,16 +16,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-
-import kotlinx.coroutines.launch
-
-
-import androidx.lifecycle.viewModelScope
-
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.receiveAsFlow
-
 
 
 @HiltViewModel
@@ -77,7 +66,6 @@ class SignUpViewModel @Inject constructor(
 
                         }
 
-                        // TODO: Send [googleIdTokenCredential.idToken] to your
                     } catch (e: GoogleIdTokenParsingException) {
                         Log.e("MainActivity", "handleSignIn:", e)
                     }
