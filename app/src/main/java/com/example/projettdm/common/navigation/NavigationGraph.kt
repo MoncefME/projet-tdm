@@ -20,6 +20,8 @@ import com.example.projettdm.auth.presentation.login_screen.SignInViewModel
 import com.example.projettdm.auth.presentation.profile_screen.ProfileScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpScreen
 import com.example.projettdm.auth.presentation.signup_screen.SignUpViewModel
+import com.example.projettdm.common.utils.OfflineScreen
+import com.example.projettdm.common.utils.isInternetAvailable
 import com.example.projettdm.onboarding.presentation.WelcomeScreen
 import com.example.projettdm.parking_list.presentation.ParkingListScreen
 import com.example.projettdm.parking_list.presentation.ParkingViewModel
@@ -36,8 +38,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @Composable
 fun NavigationGraph(
     navController: NavHostController = rememberNavController(),
-    startDestination: String
-) {
+    startDestination: String,
+    context: android.content.Context) {
     val parkingViewModel = hiltViewModel<ParkingViewModel>()
     val parkingDetailsViewModel = hiltViewModel<ParkingDetailsViewModel>()
     val signInViewModel = hiltViewModel<SignInViewModel>()
@@ -53,34 +55,50 @@ fun NavigationGraph(
         }
 
         composable(route = Screens.SignInScreen.route) {
-            SignInScreen(navController, signInViewModel)
-        }
+            if (isInternetAvailable(context)) {
+                SignInScreen(navController, signInViewModel)
+            } else {
+                OfflineScreen()
+            }        }
 
         composable(route = Screens.SignUpScreen.route) {
-            SignUpScreen(navController, loginViewModel)
-        }
+            if (isInternetAvailable(context)) {
+                SignUpScreen(navController, loginViewModel)
+            } else {
+                OfflineScreen()
+            }        }
 
         composable(route = Screens.ProfileScreen.route) {
-            Scaffold(
+
+                Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
                         bottomNavController = navController,
                         screenIndex = 3
                     )
                 }
-            ) {
+
+            )
+                {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    ProfileScreen(navController)
+                    if (isInternetAvailable(context)) {
+
+                        ProfileScreen(navController)
+                    } else {
+                        OfflineScreen()
+                    }
                 }
             }
+
         }
 
         composable(route = Screens.ParkingListScreen.route) {
-            Scaffold(
+
+                Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
                         bottomNavController = navController,
@@ -93,13 +111,20 @@ fun NavigationGraph(
                         .fillMaxSize()
                         .padding(it)
                 ) {
-                    ParkingListScreen(navController, parkingViewModel)
+                    if (isInternetAvailable(context)) {
+
+                        ParkingListScreen(navController, parkingViewModel)
+                    } else {
+                        OfflineScreen()
+                    }
                 }
             }
+
         }
 
         composable(route = Screens.ParkingMapScreen.route) {
-            Scaffold(
+
+                Scaffold(
                 bottomBar = {
                     BottomNavigationBar(
                         bottomNavController = navController,
@@ -113,10 +138,15 @@ fun NavigationGraph(
                         .padding(it)
                 ) {
                    // ParkingMapScreen(navController, parkingViewModel)
-                    LocationAwareParkingMapScreen(navController, parkingViewModel)
+                    if (isInternetAvailable(context)) {
 
+                        LocationAwareParkingMapScreen(navController, parkingViewModel)}
+                        else{
+                            OfflineScreen()
+                        }
                 }
             }
+
         }
 
         composable(route = Screens.ParkingDetailsScreen.route + "/{id}") {backStackEntry->
@@ -135,10 +165,16 @@ fun NavigationGraph(
                 ) {
                     val parkingId = backStackEntry.arguments?.getString("id")
                     if (parkingId != null) {
-                        ParkingDetailsScreen(navController, parkingDetailsViewModel, parkingId)
+                        if (isInternetAvailable(context)) {
+
+                            ParkingDetailsScreen(navController, parkingDetailsViewModel, parkingId)
+                        } else {
+                            OfflineScreen()
+                        }
                     }
                 }
             }
+
         }
 
         composable(route = Screens.ReservationsScreen.route) {backStackEntry->
