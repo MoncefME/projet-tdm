@@ -9,7 +9,5 @@ import androidx.compose.ui.Modifier
 fun EmptyScreen() {
     Row (
         modifier= Modifier.fillMaxSize(),
-    ){
-
-    }
+    ){}
 }
