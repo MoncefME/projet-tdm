@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults.buttonColors
@@ -151,27 +152,42 @@ fun ParkingDetailsScreen(
 @Composable
 fun QrCodePopup(content: String, onDismiss: () -> Unit) {
     AlertDialog(
-
         onDismissRequest = onDismiss,
-        title = { Text(text = "Reservation QR Code") },
+        title = {
+            Text(
+                text = "Reservation QR Code",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        },
         text = {
-            QrCodeDisplay(content = content)
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                QrCodeDisplay(content = content)
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Scan this QR code at the entrance",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
         },
         confirmButton = {
-            Button(onClick = onDismiss) {
-                Text("OK")
+            Button(
+                onClick = onDismiss,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
+            ) {
+                Text("OK", style = MaterialTheme.typography.bodyMedium)
             }
-        }
-    )
-}
+        },
 
-@Composable
-fun QrCodeScreen(content: String) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        QrCodeDisplay(content = content)
-    }
+        shape = RoundedCornerShape(16.dp),
+
+    )
 }

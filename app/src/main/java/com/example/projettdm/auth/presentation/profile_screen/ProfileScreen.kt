@@ -149,63 +149,63 @@ fun ProfileScreen(
 
 
                 // Reservation Page Button
-                Button(
-                    onClick = {
-                        navController.navigate(Screens.ReservationsScreen.route)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ShoppingCart,
-                        contentDescription = "Reservations Icon",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Reservations")
-                }
+//                Button(
+//                    onClick = {
+//                        navController.navigate(Screens.ReservationsScreen.route)
+//                    },
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(top = 16.dp)
+//                ) {
+//                    Icon(
+//                        imageVector = Icons.Default.ShoppingCart,
+//                        contentDescription = "Reservations Icon",
+//                        tint = Color.White,
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                    Spacer(modifier = Modifier.width(8.dp))
+//                    Text(text = "Reservations")
+//                }
 
 
                 // Parking List Button
-                Button(
-                    onClick = {
-                        navController.navigate(Screens.ParkingListScreen.route)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.List,
-                        contentDescription = "Parking List Icon",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Parking List")
-                }
+//                Button(
+//                    onClick = {
+//                        navController.navigate(Screens.ParkingListScreen.route)
+//                    },
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(top = 16.dp)
+//                ) {
+//                    Icon(
+//                        imageVector = Icons.Default.List,
+//                        contentDescription = "Parking List Icon",
+//                        tint = Color.White,
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                    Spacer(modifier = Modifier.width(8.dp))
+//                    Text(text = "Parking List")
+//                }
 
 
                 // Map Button
-                Button(
-                    onClick = {
-                        navController.navigate(Screens.ParkingMapScreen.route)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Place,
-                        contentDescription = "Map Icon",
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Map")
-                }
+//                Button(
+//                    onClick = {
+//                        navController.navigate(Screens.ParkingMapScreen.route)
+//                    },
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .padding(top = 16.dp)
+//                ) {
+//                    Icon(
+//                        imageVector = Icons.Default.Place,
+//                        contentDescription = "Map Icon",
+//                        tint = Color.White,
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                    Spacer(modifier = Modifier.width(8.dp))
+//                    Text(text = "Map")
+//                }
             }
 
 

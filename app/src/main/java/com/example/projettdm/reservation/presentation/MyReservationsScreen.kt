@@ -34,10 +34,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
+import com.example.projettdm.R
 import com.example.projettdm.common.navigation.Screens
 import com.example.projettdm.reservation.data.model.Reservation
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
 
 @Composable
@@ -52,6 +59,7 @@ fun MyReservationsScreen(parkingDetailsViewModel: ParkingDetailsViewModel, navCo
 
 @Composable
 fun DisplayReservations(reservations: List<Reservation>, navController: NavController) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -105,6 +113,9 @@ fun DisplayReservations(reservations: List<Reservation>, navController: NavContr
 
 @Composable
 fun ReservationCard(reservation: Reservation, navController: NavController) {
+    val entryTimeIcon = painterResource(R.drawable.time_start)
+    val exitTimeIcon = painterResource(R.drawable.time_end)
+    val cityIcon = painterResource(R.drawable.city)
     val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
 
     val qrCodeContent = reservation.id
@@ -125,65 +136,25 @@ fun ReservationCard(reservation: Reservation, navController: NavController) {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            // Parking Name
+            // Header: Parking Name
             Text(
                 text = "Parking : ${reservation.parkingName ?: "Unknown"}",
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Place
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.Place,
-                    contentDescription = "Place Icon",
-                    tint = MaterialTheme.colorScheme.secondary
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Place: ",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = reservation.parkingCity ?: "Unknown",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
+            // Content: Reservation Details
+            Column {
 
-            // Entry Time
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowRight,
-                    contentDescription = "Entry Time Icon",
-                    tint = MaterialTheme.colorScheme.secondary
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Entry Time: ${reservation.entryTime}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Exit Time
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowRight,
-                    contentDescription = "Exit Time Icon",
-                    tint = MaterialTheme.colorScheme.secondary
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Exit Time: ${reservation.exiteTime}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
+                ReservationInfoRow(iconPainter = cityIcon,"Place:", reservation.parkingCity ?: "Unknown")
+                ReservationInfoRow(iconPainter = entryTimeIcon,"Entry Time:", reservation.entryTime)
+                ReservationInfoRow(iconPainter = exitTimeIcon,"Exit Time:", reservation.exiteTime)
             }
             Spacer(modifier = Modifier.height(16.dp))
 
+            // Footer: Buttons
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -216,7 +187,56 @@ fun ReservationCard(reservation: Reservation, navController: NavController) {
         }
     }
 
+
     if (showDialog) {
         QrCodePopup(content = qrCodeContent, onDismiss = { setShowDialog(false) })
     }
 }
+
+
+@Composable
+fun ReservationInfoRow(iconPainter:Painter,label: String, value: Any) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically,){
+            Icon(
+                painter = iconPainter,
+                contentDescription = "Icon",
+                Modifier.size(24.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        }
+        Spacer(modifier = Modifier.width(8.dp))
+        when (value) {
+            is Date -> FormattedDateTimeText(value)
+            is String -> Text(
+                text = value,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+    }
+}
+
+@Composable
+fun FormattedDateTimeText(dateTime: Date) {
+    val formattedDateTime = remember(dateTime) {
+        val formatter = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+        formatter.format(dateTime)
+    }
+
+    Text(
+        text = formattedDateTime,
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurface
+    )
+}
+
