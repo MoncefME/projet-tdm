@@ -10,7 +10,7 @@ plugins {
 
 
 
-//    alias(libs.plugins.google.services)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -76,7 +76,7 @@ dependencies {
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.runtime)
     implementation(libs.play.services.location)
-
+    implementation(libs.firebase.messaging.ktx)
 
 
     // Testing
@@ -146,7 +146,20 @@ dependencies {
     implementation(libs.zxing)
     implementation(libs.zxing2)
 
+    //push notifications
+    implementation(libs.firebase.bom)
+
+    implementation(libs.firebase.messaging)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.accompanist.permissions)
+
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
+
+    implementation(libs.material)
+    implementation(libs.androidx.material)
+    implementation(libs.ui)
 }

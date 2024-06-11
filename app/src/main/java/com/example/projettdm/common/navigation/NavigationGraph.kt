@@ -1,6 +1,8 @@
 package com.example.projettdm.common.navigation
 
+import android.os.Build
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +31,7 @@ import com.example.projettdm.reservation.presentation.ParkingDetailsScreen
 import com.example.projettdm.reservation.presentation.ParkingDetailsViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @OptIn(ExperimentalAnimationApi::class, ExperimentalPagerApi::class)
 @Composable
 fun NavigationGraph(

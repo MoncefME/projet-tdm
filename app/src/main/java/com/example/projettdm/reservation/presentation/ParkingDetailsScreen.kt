@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -66,9 +67,13 @@ fun ParkingDetailsScreen(
     val exitDate = remember { mutableStateOf("") }
     val entryHour = remember { mutableStateOf("") }
     val exitHour = remember { mutableStateOf("") }
-    val dateTime = remember { mutableStateOf("") }
+    //val dateTime = remember { mutableStateOf("") }
 
     val price = "100$"
+    val entryDateTime = remember { mutableStateOf<Date?>(null) }
+    val exitDateTime = remember { mutableStateOf<Date?>(null) }
+
+    val dateTime = remember { mutableStateOf(TextFieldValue("")) }
     val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
     val (reservationId, setReservationId) = remember { mutableStateOf("") }
 
@@ -79,25 +84,28 @@ fun ParkingDetailsScreen(
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        // Display parking image (assuming `viewModel.parking.value?.image` is a valid URL)
-        //   AsyncImage(model = viewModel.parking.value?.image, contentDescription = null)
-
-        // Display parking name (assuming `viewModel.parking.value?.name` is not null)
 
         Text(text = viewModel.parking.value?.name ?: "", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
 
-        // Display parking city (assuming `viewModel.parking.value?.city` is not null)
         Text(text = viewModel.parking.value?.city ?: "", style = MaterialTheme.typography.bodyMedium)
 
         Spacer(modifier = Modifier.height(16.dp)) // Add spacing after basic info
 
-        //Combined entry date and time input
         Text(text = "Entry Date & Time")
-        OutlinedTextField(
-            value = dateTime.value, // Use the combined state variable `dateTime`
-            onValueChange = { dateTime.value = it },
-            modifier = Modifier.fillMaxWidth(),
-        )
+        DateTimePicker { selectedDate ->
+            entryDateTime.value = selectedDate
+            dateTime.value = TextFieldValue(selectedDate.toString()) // Format as needed
+        }
+        Text(text = "Exit Date & Time")
+        DateTimePicker { selectedDate ->
+            exitDateTime.value = selectedDate
+            dateTime.value = TextFieldValue(selectedDate.toString()) // Format as needed
+        }
+//        OutlinedTextField(
+//            value = dateTime.value, // Use the combined state variable `dateTime`
+//            onValueChange = { dateTime.value = it },
+//            modifier = Modifier.fillMaxWidth(),
+//        )
 
         Text(
             text = "Price: ${viewModel.parking.value?.price.toString()}", // Use `parking.price` directly
@@ -116,8 +124,8 @@ fun ParkingDetailsScreen(
             onClick = {
                 val reservation = Reservation(
                     parkingId = parkingId,
-                    entryTime = currentDate,
-                    exiteTime = currentDate
+                    entryTime = entryDateTime.value ?: Date(),
+                    exiteTime = exitDateTime.value ?: Date()
                 )
                 // viewModel.addReservation(reservation)
                 viewModel.addReservation(reservation) { id ->
